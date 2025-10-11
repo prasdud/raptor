@@ -1,0 +1,181 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{titling}
+
+% Colors
+\definecolor{coverred}{RGB}{139,0,0}
+\definecolor{darkblue}{RGB}{7,16,40}
+\definecolor{offwhite}{RGB}{245,245,245} % off-white background
+
+% Sections formatting
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Page \thepage}  % just current page
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+\setstretch{1.1}
+
+% Cover page
+\newcommand{\coverpage}{
+    \thispagestyle{empty}
+    \begin{titlepage}
+        \pagecolor{coverred}
+        \color{white}
+        \centering
+        \vspace*{5cm}
+        {\Huge \textbf{Red Team AI Malware Simulation Report} \par}
+        \vspace{1cm}
+        {\Large Target: {{ target_name }} \par}
+        \vspace{0.5cm}
+        {\large Generated: {{ generated_at }} \par}
+        Simulation: {{ sim_start }} $\rightarrow$ {{ sim_end }} \par
+        Version: Red Team AI Engine v2025.09.11 \par
+        \vspace{1cm}
+        Author / Team: Red Team / Security Assessment Team \par
+        \vfill
+    \end{titlepage}
+    \pagecolor{offwhite}  % reset page color for rest of document
+    \color{black}          % reset text color
+}
+
+% License & Disclosure page
+\newcommand{\licensepage}{
+    \thispagestyle{empty}
+    \section*{License \& Disclosure}
+    This software and report are provided purely for educational and security assessment purposes. 
+    Any misuse of this report or software is strictly prohibited, and the original creators 
+    will not be held accountable. \\
+    \vspace{0.5cm}
+    \textbf{Software License Summary:} The Red Team AI Engine v2025.09.11 is provided under 
+    a non-commercial educational license for internal security simulations only.
+    \newpage
+}
+
+\begin{document}
+
+% Cover
+\coverpage
+
+% License / Disclosure
+\licensepage
+
+% Executive Summary
+\section*{Executive Summary}
+\textbf{Purpose of simulation:} {{ exec_summary.purpose | default("This simulation assessed the security posture of the target system.") }} \\
+\textbf{Key Findings:}
+\begin{itemize}
+    \item Open Ports / Services: {{ exec_summary.open_ports_summary | default("N/A") }}
+    \item Sensitive Data: {{ exec_summary.sensitive_data | default("None") }}
+    \item Evasion Success Rate: {{ exec_summary.evasion_success | default(0) }}\%
+    \item Active AV / EDR: {{ exec_summary.av_name | default("Unknown") }}
+    \item Overall Risk Assessment: {{ exec_summary.overall_risk | default("Low") }}
+\end{itemize}
+
+\textbf{AI Model Performance:}
+\begin{itemize}
+    \item Evasion AI: {{ exec_summary.evasion_ai | default(0) }}\%
+    \item Recon Prioritisation AI: {{ exec_summary.recon_ai | default(0) }}\%
+    \item Attack Decision AI: {{ exec_summary.attack_ai | default(0) }}\%
+\end{itemize}
+
+\textbf{Potential Impact:} {{ exec_summary.impact_note | default("N/A") }}
+\newpage
+
+% Scope & Methodology
+\section*{Scope \& Methodology}
+Phase 1 - Recon \\
+Phase 2 - C2 and Dummy Actions \\
+Phase 3 - Reporting \\
+AI Models Used: Evasion AI, Recon Prioritization AI, Attack Decision AI \\
+Additional Techniques: {{ scope.techniques | default("Standard AI malware simulation techniques.") }}
+\newpage
+
+% Recon Findings
+\section*{Recon Findings}
+\begin{itemize}
+    \item OS: {{ recon_data.os_name }} {{ recon_data.os_version }} ({{ recon_data.architecture }})
+    \item Hostname: {{ recon_data.hostname }}
+    \item Current User: {{ recon_data.current_user }} (Admin: {{ recon_data.is_admin }})
+    \item Open Ports: {% for p in recon_data.open_ports %}{{ p }}{% if not loop.last %}, {% endif %}{% endfor %}
+    \item Environment Variables: \\
+    \begin{verbatim}
+{{ recon_data.env_vars | safe }}
+    \end{verbatim}
+\end{itemize}
+\newpage
+
+% Findings & Analysis
+\section*{Findings \& Analysis}
+\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{3cm}|}
+\hline
+\textbf{Finding / Issue} & \textbf{Evidence / Data} & \textbf{Severity} & \textbf{Potential Impact if Real System} \\
+\hline
+{% for f in findings %}
+{{ f.name | default("N/A") }} & {{ f.evidence | default("N/A") }} & {{ f.severity | default("Medium") }} & {{ f.impact | default("N/A") }} \\
+\hline
+{% endfor %}
+\end{longtable}
+\newpage
+
+% Evasion Metrics
+\section*{Evasion Metrics}
+Overall Success Rate: {{ evasion.overall_success | default(0) }}\% \\
+Actions Skipped or Delayed:
+\begin{itemize}
+{% for action in evasion.skipped %}
+    \item {{ action }}
+{% endfor %}
+\end{itemize}
+
+{% if charts.evasion_chart %}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{ {{ charts.evasion_chart }} }
+\caption{Evasion Success Chart}
+\end{figure}
+{% endif %}
+\newpage
+
+% Attack Simulation Summary
+\section*{Attack Simulation Summary}
+\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{2cm}|}
+\hline
+\textbf{Action Name} & \textbf{Description} & \textbf{Outcome} & \textbf{Priority / Score} \\
+\hline
+{% for a in attacks %}
+{{ a.name | default("N/A") }} & {{ a.description | default("N/A") }} & {{ a.outcome | default("N/A") }} & {{ a.priority | default("N/A") }} \\
+\hline
+{% endfor %}
+\end{longtable}
+\newpage
+
+% LLM Based Mitigations
+\section*{LLM Based Mitigations}
+\begin{itemize}
+{% for m in mitigations %}
+    \item {{ m }}
+{% endfor %}
+\end{itemize}
+\newpage
+
+% Raw Data
+\section*{Raw Data}
+\begin{verbatim}
+{{ raw_data | safe }}
+\end{verbatim}
+
+\end{document}

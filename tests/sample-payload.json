@@ -1,0 +1,73 @@
+{
+  "sim_start": "2025-10-11 14:00",
+  "sim_end": "2025-10-11 16:30",
+  "recon_data": {
+    "os_name": "Ubuntu",
+    "os_version": "22.04.1 LTS",
+    "architecture": "64bit",
+    "hostname": "test-server",
+    "current_user": "root",
+    "is_admin": true,
+    "open_ports": [21, 80, 631],
+    "env_vars": {
+      "PATH": "/usr/bin:/bin",
+      "SHELL": "/bin/bash"
+    }
+  },
+  "exec_summary": {
+    "purpose": "Assess security posture via AI-driven malware simulation.",
+    "open_ports_summary": "Ports 21 (FTP), 80 (HTTP), 631 (IPP) detected.",
+    "sensitive_data": "Example files found in /home/test/public/",
+    "evasion_success": 85,
+    "av_name": "Simulated AV v1.2",
+    "overall_risk": "Medium",
+    "evasion_ai": 85,
+    "recon_ai": 90,
+    "attack_ai": 80,
+    "impact_note": "If this were a production system, exposed services increase compromise risk."
+  },
+  "scope": {
+    "techniques": "Recon, evasion, dummy file exfiltration, simulated lateral movement."
+  },
+  "findings": [
+    {
+      "name": "Open SSH Port",
+      "evidence": "Port 22 open on host; SSH service detected (OpenSSH 7.x).",
+      "severity": "High",
+      "impact": "Could allow remote exploitation if credentials are weak."
+    },
+    {
+      "name": "Sensitive Files in Public Directory",
+      "evidence": "/home/test/public/FinancialData.xlsx found.",
+      "severity": "Critical",
+      "impact": "Confidential data exposure."
+    }
+  ],
+  "evasion": {
+    "overall_success": 85,
+    "skipped": ["Privilege escalation attempt skipped due to high detection risk"],
+    "chart_data": [
+      {"label": "Evaded", "value": 85},
+      {"label": "Detected", "value": 15}
+    ]
+  },
+  "attacks": [
+    {
+      "name": "Dummy File Exfiltration",
+      "description": "Simulated exfiltration of non-critical test files.",
+      "outcome": "Success",
+      "priority": 9
+    },
+    {
+      "name": "Privilege Escalation",
+      "description": "Attempted local privilege escalation (simulated).",
+      "outcome": "Skipped",
+      "priority": 8
+    }
+  ],
+  "mitigations": [
+    "Restrict public file permissions",
+    "Update outdated software",
+    "Monitor for suspicious outbound connections"
+  ]
+}

@@ -1,0 +1,71 @@
+@page {
+  size: A4;
+  margin: 0; /* no margin so background can reach edges */
+}
+
+/* COVER PAGE */
+.cover {
+  background: #b71c1c;     /* full red */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 210mm;             /* A4 width */
+  height: 297mm;            /* A4 height */
+  margin: 0;                /* no margin */
+  padding: 0;               /* no padding */
+}
+.cover h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+.cover h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.cover p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+
+/* Regular content pages */
+.content-page {
+  background: #ffffff;  /* white / lighter background */
+  color: #0b0f14;
+  padding: 20mm;        /* keep margins */
+}
+.section {
+  margin-bottom: 16px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 8px 0;
+}
+th, td {
+  padding: 6px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Code / preformatted */
+pre.code {
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  overflow: auto;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+/* Charts */
+.chart {
+  text-align: center;
+  margin: 12px 0;
+}

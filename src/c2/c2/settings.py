@@ -56,7 +56,7 @@ ROOT_URLCONF = 'c2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "jinja_templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +65,15 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        },
+    },
+    # Jinja2 Templates
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [BASE_DIR / "jinja_templates"],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'c2.jinja2_env.environment',  # optional custom env
         },
     },
 ]
