@@ -1,0 +1,261 @@
+{
+  "target_name": "test-server",
+  "generated_at": "2025-10-11T16:40:00Z",
+  "sim_start": "2025-10-11 14:00",
+  "sim_end": "2025-10-11 16:30",
+
+  "exec_summary": {
+    "purpose": "This simulation assessed the security posture of the target system and tested its defenses against a controlled AI-driven malware attack.",
+    "open_ports_list": [
+      "22 (SSH) - OpenSSH 8.2p1",
+      "80 (HTTP) - nginx 1.18.0",
+      "445 (SMB) - Samba 4.11 (SMBv1 detected)"
+    ],
+    "sensitive_data_list": [
+      "/home/test/public/FinancialData.xlsx",
+      "/etc/credentials/backup_creds.txt"
+    ],
+    "evasion_success": 85,
+    "av_list": [
+      "ClamAV 0.103.2 (signature-based)",
+      "OS-integrated agent (basic telemetry)"
+    ],
+    "overall_risk": "Medium",
+    "evasion_ai": 85,
+    "recon_ai": 92,
+    "attack_ai": 76
+  },
+
+  "scope": {
+    "techniques": "Standard AI simulation, benign telemetry generation, lab-scoped scanning techniques. Passive discovery, consented active scanning, simulated C2 exchanges, and non-persistent dummy actions.",
+    "phases": [
+      "Phase 1 - Reconnaissance (Passive & Active Collection)",
+      "Phase 2 - C2 Simulation & Dummy Actions (Controlled Emulation)",
+      "Phase 3 - Reporting & Analysis"
+    ],
+    "ai_models": [
+      {
+        "name": "Evasion AI",
+        "role": "Payload-side model that adapts actions to reduce detection signals observed from simulated detectors."
+      },
+      {
+        "name": "Recon Prioritisation AI",
+        "role": "Server-side model that ranks reconnaissance findings by risk and operational relevance."
+      },
+      {
+        "name": "Attack Decision AI",
+        "role": "Server-side planner that selects the next simulated action based on priorities and evasion feedback."
+      }
+    ]
+  },
+
+  "recon_data": {
+    "os_name": "Ubuntu",
+    "os_version": "22.04.1 LTS",
+    "architecture": "64bit",
+    "patches": [
+      "2025-09-10: kernel security update",
+      "2025-09-20: openssl patch"
+    ],
+    "installed_software": [
+      "nginx 1.18.0",
+      "OpenSSH 8.2p1",
+      "Samba 4.11",
+      "Python 3.10.12",
+      "Docker 20.10"
+    ],
+    "privileged_accounts": [
+      "root",
+      "admin"
+    ],
+    "active_users": [
+      "root",
+      "testuser",
+      "svc-backup"
+    ],
+    "default_creds": "None detected",
+    "network_ips": [
+      "192.168.50.10"
+    ],
+    "subnets": [
+      "192.168.50.0/24"
+    ],
+    "firewalls": [
+      "ufw (default deny incoming, open ports: 22,80,445)"
+    ],
+    "vpn_dmz": "DMZ present for web-facing hosts; internal admin subnet protected via VPN",
+    "open_ports": [
+      {
+        "number": 22,
+        "protocol": "tcp",
+        "service_name": "ssh",
+        "version": "OpenSSH 8.2p1",
+        "vulns": []
+      },
+      {
+        "number": 80,
+        "protocol": "tcp",
+        "service_name": "http",
+        "version": "nginx 1.18.0",
+        "vulns": [
+          "CVE-2021-23017"
+        ]
+      },
+      {
+        "number": 445,
+        "protocol": "tcp",
+        "service_name": "smb",
+        "version": "Samba 4.11",
+        "vulns": [
+          "CVE-2017-7494"
+        ]
+      }
+    ],
+    "processes": [
+      {
+        "name": "nginx",
+        "pid": 2134,
+        "user": "www-data"
+      },
+      {
+        "name": "sshd",
+        "pid": 1020,
+        "user": "root"
+      },
+      {
+        "name": "clamd",
+        "pid": 4521,
+        "user": "clamav"
+      }
+    ],
+    "connected_devices": [
+      {
+        "type": "Printer",
+        "identifier": "HP-LaserJet-203",
+        "status": "online"
+      },
+      {
+        "type": "NAS",
+        "identifier": "storage-01.local",
+        "status": "mounted"
+      }
+    ],
+    "active_av": [
+      {
+        "name": "ClamAV",
+        "version": "0.103.2"
+      }
+    ],
+    "misconfigurations": [
+      "Public directory with world-readable files: /home/test/public",
+      "SMB fallback to SMBv1 supported on Samba (legacy protocol enabled)"
+    ]
+  },
+
+  "findings": [
+    {
+      "name": "Sensitive Files in Public Directory",
+      "evidence": "Files detected in /home/test/public/FinancialData.xlsx",
+      "severity": "Critical",
+      "impact": "Confidential data exposure; risk of exfiltration"
+    },
+    {
+      "name": "Open SMB Port",
+      "evidence": "Port 445 open on host; Samba 4.11 with SMBv1 support",
+      "severity": "High",
+      "impact": "Could allow remote exploitation and lateral movement"
+    },
+    {
+      "name": "Outdated nginx",
+      "evidence": "nginx 1.18.0 detected (CVE-2021-23017 present)",
+      "severity": "Medium",
+      "impact": "Information disclosure via known vulnerability"
+    },
+    {
+      "name": "World-readable public directory",
+      "evidence": "/home/test/public directory has global read permissions",
+      "severity": "High",
+      "impact": "Exposure of sensitive files to unauthenticated users"
+    }
+  ],
+
+  "evasion": {
+    "detection_mechanisms": [
+      "Signature-based AV",
+      "Host telemetry (process creation logging)",
+      "Network IDS (basic)",
+      "File integrity monitoring (basic)"
+    ],
+    "av_edr": [
+      {
+        "name": "ClamAV",
+        "version": "0.103.2",
+        "notes": "signature-based scanning, periodic updates"
+      }
+    ],
+    "vm_detection": "No conclusive VM/sandbox detection heuristics triggered; minor timing-based heuristics observed",
+    "monitoring": [
+      "syslog forwarded to central server",
+      "process creation audit rules enabled",
+      "basic netflow collection"
+    ],
+    "overall_success": 85,
+    "per_defense": [
+      {
+        "defense": "Signature-based AV",
+        "success_rate": 90
+      },
+      {
+        "defense": "Process-creation detection",
+        "success_rate": 78
+      },
+      {
+        "defense": "Network IDS",
+        "success_rate": 82
+      },
+      {
+        "defense": "File integrity monitoring",
+        "success_rate": 75
+      }
+    ],
+    "skipped": [
+      "Credential dumping (skipped due to high detection risk)",
+      "Local privilege escalation exploit (skipped; unsafe in lab)"
+    ]
+  },
+
+  "charts": {
+    "evasion_chart": "evasion_chart.png"
+  },
+
+  "attacks": [
+    {
+      "name": "Dummy file exfiltration",
+      "description": "Simulated exfiltration of non-sensitive placeholder files to a benign sink; no actual data exfiltration performed.",
+      "outcome": "Success",
+      "priority": 8
+    },
+    {
+      "name": "Simulated lateral movement",
+      "description": "Attempted lateral movement via discovered SMB share; simulation used inert probes only.",
+      "outcome": "Failed",
+      "priority": 6
+    },
+    {
+      "name": "Privilege escalation (simulated)",
+      "description": "Simulated attempt to escalate privileges; full exploit not executed; check for vulnerable services and config.",
+      "outcome": "Skipped",
+      "priority": 9
+    }
+  ],
+
+  "mitigations": [
+    "Remove sensitive files from public directories and enforce least-privilege ACLs on /home/test/public.",
+    "Disable SMBv1 support on Samba and apply vendor patches; restrict SMB to internal subnets only.",
+    "Update nginx to the latest stable version and apply security patches (address CVE-2021-23017).",
+    "Ensure AV signatures are up-to-date and configure more frequent scans; enable behavioral rules where possible.",
+    "Harden logging and monitoring: add host-based EDR with behavior analysis and centralize alerts for correlation.",
+    "Review user privileges; remove unused privileged accounts and enable multi-factor authentication for admin users."
+  ]
+
+}

@@ -1,0 +1,779 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{titling}
+
+% Colors
+\definecolor{coverred}{RGB}{139,0,0}
+\definecolor{darkblue}{RGB}{7,16,40}
+\definecolor{offwhite}{RGB}{245,245,245} % off-white background
+
+% Sections formatting
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Page \thepage}  % just current page
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+\setstretch{1.1}
+
+% Cover page
+\newcommand{\coverpage}{
+    \thispagestyle{empty}
+    \begin{titlepage}
+        \pagecolor{coverred}
+        \color{white}
+        \centering
+        \vspace*{5cm}
+        {\Huge \textbf{Red Team AI Malware Simulation Report} \par}
+        \vspace{1cm}
+        {\Large Target: UNKNOWN \par}
+        \vspace{0.5cm}
+        {\large Generated: 2025-10-11 16:49 UTC \par}
+        Simulation: 2025-10-11 14:00 $\rightarrow$ 2025-10-11 16:30 \par
+        Version: Red Team AI Engine v2025.09.11 \par
+        \vspace{1cm}
+        Author / Team: Red Team / Security Assessment Team \par
+        \vfill
+    \end{titlepage}
+    \pagecolor{offwhite}  % reset page color for rest of document
+    \color{black}          % reset text color
+}
+
+% License & Disclosure page
+\newcommand{\licensepage}{
+    \thispagestyle{empty}
+    \section*{License \& Disclosure}
+
+    \textbf{RAPTOR License (Research \& Educational Use Only)}\\[0.3cm]
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to use,
+    copy, modify, and distribute the Software, subject to the following conditions:
+
+    \begin{enumerate}
+        \item \textbf{Permitted Uses:} 
+        \begin{itemize}
+            \item The Software may be used \textbf{solely for research, academic study, security education, or lawful red-team training}.
+            \item The Software may not be used in production systems, commercial products, or for personal/organizational gain without prior written consent.
+        \end{itemize}
+
+        \item \textbf{Prohibited Uses:} 
+        \begin{itemize}
+            \item The Software may \textbf{not} be used for any illegal, malicious, or unethical purposes.
+            \item The Software may \textbf{not} be used to create, distribute, or deploy real malware, nor to perform unauthorized penetration testing, cyberattacks, or exploitation of systems.
+            \item The Software may \textbf{not} be integrated into any tool, platform, or service intended to cause harm.
+        \end{itemize}
+
+        \item \textbf{Non-Commercial Use:} 
+        \begin{itemize}
+            \item The Software is licensed strictly for \textbf{non-commercial purposes}.
+            \item Commercial use, including offering it as a service, bundling into products, or selling derivatives, is strictly prohibited without explicit written permission.
+        \end{itemize}
+
+        \item \textbf{Attribution:} 
+        \begin{itemize}
+            \item Any use, modification, or redistribution must retain this license and provide clear attribution to the original author: \textbf{Abdul Muid (2025), RAPTOR – Red Team AI Malware Simulator}.
+        \end{itemize}
+
+        \item \textbf{Disclaimer of Liability:} 
+        \begin{itemize}
+            \item The Software is provided \textbf{for research and educational purposes only}.
+            \item No warranties are provided; the author is not liable for any damages or claims arising from use.
+            \item By using the Software, you assume full responsibility for compliance with applicable laws.
+        \end{itemize}
+    \end{enumerate}
+    \newpage
+}
+
+
+\begin{document}
+
+% Cover
+\coverpage
+
+% License / Disclosure
+\licensepage
+
+% Executive Summary
+\section*{Executive Summary}
+
+\textbf{Purpose of Simulation:} \\
+This simulation assessed the security posture of the target system and tested its defenses against a controlled AI-driven malware attack. 
+The goal was to evaluate how the system responds to various automated offensive techniques, including evasion, reconnaissance, and attack decision-making.
+
+\vspace{0.3cm}
+\textbf{Key Findings:} \\
+\begin{itemize}
+    \item \textbf{Open Ports / Services of Concern:} 
+    \begin{itemize}
+        
+            \item 22 (SSH) - OpenSSH 8.2p1
+        
+            \item 80 (HTTP) - nginx 1.18.0
+        
+            \item 445 (SMB) - Samba 4.11 (SMBv1 detected)
+        
+    \end{itemize}
+    
+    \item \textbf{Sensitive Files or Data Identified:} 
+    \begin{itemize}
+        
+            \item /home/test/public/FinancialData.xlsx
+        
+            \item /etc/credentials/backup_creds.txt
+        
+    \end{itemize}
+    
+    \item \textbf{Evasion Success Rate:} 85\%
+    
+    \item \textbf{Active AV / EDR Detected:} 
+    \begin{itemize}
+        
+            \item ClamAV 0.103.2 (signature-based)
+        
+            \item OS-integrated agent (basic telemetry)
+        
+    \end{itemize}
+
+    \item \textbf{Overall Risk Assessment:} Medium
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{AI Model Performance:} \\
+\begin{itemize}
+    \item \textbf{Evasion AI:} 85\% — Successfully evaded detection for 85\% of actions.
+    \item \textbf{Recon Prioritisation AI:} 92\% — Correctly prioritized 92\% of reconnaissance findings.
+    \item \textbf{Attack Decision AI:} 76\% — Selected optimal attack actions 76\% of the time.
+\end{itemize}
+
+\newpage
+
+
+% Scope & Methodology
+\section*{Scope \& Methodology}
+
+\subsection*{Overview}
+This engagement is a controlled, simulated assessment executed by the RAPTOR Red Team AI Malware Simulator. 
+The purpose is to evaluate detection, prioritisation, and response capabilities of the target system in a safe research environment — not to perform real-world exploitation. 
+All activity is constrained to authorized test systems and simulated payloads. \\
+
+\subsection*{Phases}
+\textbf{Phase 1 — Reconnaissance (Passive \& Active Collection)} \\
+Objective: gather an inventory of the target system (OS, services, users, exposed ports, environment variables, and candidate sensitive files) to produce prioritized reconnaissance findings for later phases.  
+Scope: passive discovery first (public-facing services, metadata), followed by limited, consented active scanning in a lab-like environment.  
+Deliverables: structured recon dataset, open port list, environment snapshot, and prioritized asset list. \\
+
+\textbf{Phase 2 — C2 Simulation & Dummy Actions (Controlled Emulation)} \\
+Objective: emulate attacker post‑compromise behaviour at a high level — command-and-control interaction, staged dummy actions, and controlled data movement — while avoiding any real malicious payloads or persistence mechanisms.  
+Scope: simulated C2 exchanges and benign stand‑in payloads that exercise detection logic and telemetry generation only. Actions are designed to provoke detection and measure evasion, not to exploit vulnerabilities. \\
+
+\textbf{Phase 3 — Reporting \& Analysis} \\
+Objective: consolidate data from prior phases into an evidence-backed report, quantify model performance, and provide mitigations and recommendations.  
+Deliverables: structured findings, charts (e.g., evasion success), per‑module analysis, and an executive summary suitable for stakeholders.
+
+\subsection*{AI Models and Roles}
+\textbf{Evasion AI (Payload-side, Learns Detector Signals)} \\
+Role: adapt simulated offensive behaviour to reduce detection signals observed in the sandboxed environment. The model optimizes for increased “stealth” as measured by telemetry/sensor responses and detection flags.  
+Outputs: an evasion score, action-level success rates, and a ranked list of actions that consistently avoid detection.  
+Notes: this model operates solely against simulated detectors and logged telemetry; it does not create or deliver real-world exploits.
+
+\textbf{Recon Prioritisation AI (Server-side, Post-processing)} \\
+Role: ingest raw reconnaissance artifacts (service lists, file discovery, logs) and rank findings by operational relevance and risk. It helps the analyst focus on high‑value assets and probable attack vectors.  
+Outputs: prioritized recon list, confidence scores, and suggested follow-ups.
+
+\textbf{Attack Decision AI (Server-side, Planner)} \\
+Role: select the next benign/simulated action based on recon priorities, evasion feedback, and mission objectives. It balances likelihood of success, detection risk, and mission value to recommend the best next simulated step.  
+Outputs: ordered action plans and rationale metadata (e.g., why an action was chosen).
+
+\subsection*{Data, Metrics \& Evaluation}
+Key metrics captured during simulations include:
+\begin{itemize}
+    \item \textbf{Evasion Success Rate:} percentage of simulated actions that did not trigger detection flags.
+    \item \textbf{Detection Events:} timestamped telemetry and alert counts for each simulated action.
+    \item \textbf{Recon Prioritisation Accuracy:} analyst-validated relevance of top-N findings.
+    \item \textbf{Decision Optimality:} proportion of selected actions that met mission objectives under risk constraints.
+\end{itemize}
+
+Evaluation approach: metrics are aggregated per-simulation and across runs; charts (e.g., pie/bar) visualise distributions. All model outputs are accompanied by confidence values and human-readable explanations to aid analyst review.
+
+\subsection*{Safety, Ethics \& Operational Controls}
+This simulation adheres to strict safety and ethical controls:
+\begin{itemize}
+    \item \textbf{Authorization:} tests are executed only on systems explicitly authorized for simulation. No unsanctioned scanning or exploitation is performed.
+    \item \textbf{No Real Exploits:} payloads are inert or simulated placeholders; persistence, credential theft, or destructive actions are not performed.
+    \item \textbf{Logging \& Isolation:} all activity is logged, contained within isolated test networks, and retained for post‑test analysis.
+    \item \textbf{Human Oversight:} model decisions and high‑risk actions require human review before enactment in any semi-automated workflow.
+    \item \textbf{Compliance:} users of the software must comply with applicable laws, institutional policies, and the RAPTOR license terms.
+\end{itemize}
+
+\subsection*{Tools, Techniques \& Limitations}
+Additional Techniques: Standard AI simulation, benign telemetry generation, lab-scoped scanning techniques. Passive discovery, consented active scanning, simulated C2 exchanges, and non-persistent dummy actions. \\[0.2cm]
+Limitations: results are representative for the test environment and detectors used; real production systems and defensive stacks may behave differently. Model performance depends on the quality of telemetry and labelled data available.
+
+\newpage
+
+
+% Recon Findings
+\section*{Recon Findings}
+
+\subsection*{Host Information}
+\begin{itemize}
+    \item Operating System: Ubuntu 22.04.1 LTS
+    \item Architecture: 64bit
+    \item Patch Level / Updates: 2025-09-10: kernel security update, 2025-09-20: openssl patch
+    \item Installed Software: 
+    \begin{itemize}
+    
+        \item nginx 1.18.0
+    
+        \item OpenSSH 8.2p1
+    
+        \item Samba 4.11
+    
+        \item Python 3.10.12
+    
+        \item Docker 20.10
+    
+    \end{itemize}
+\end{itemize}
+
+\subsection*{User \& Account Details}
+\begin{itemize}
+    \item Privileged Accounts: 
+    \begin{itemize}
+    
+        \item root
+    
+        \item admin
+    
+    \end{itemize}
+    \item Active Users:
+    \begin{itemize}
+    
+        \item root
+    
+        \item testuser
+    
+        \item svc-backup
+    
+    \end{itemize}
+    \item Default Credentials Detected: None detected
+\end{itemize}
+
+\subsection*{Network Topology}
+\begin{itemize}
+    \item IP Addresses: 192.168.50.10
+    \item Subnets: 192.168.50.0/24
+    \item Firewalls: ufw (default deny incoming, open ports: 22,80,445)
+    \item VPN / DMZ / Segmentation Info: DMZ present for web-facing hosts; internal admin subnet protected via VPN
+\end{itemize}
+
+\subsection*{Open Ports \& Services}
+\begin{itemize}
+    
+    \item Port 22 / tcp — Service: ssh vOpenSSH 8.2p1
+    
+    \item Port 80 / tcp — Service: http vnginx 1.18.0 — Known CVEs: CVE-2021-23017
+    
+    \item Port 445 / tcp — Service: smb vSamba 4.11 — Known CVEs: CVE-2017-7494
+    
+\end{itemize}
+
+\subsection*{Active Processes \& Services}
+\begin{itemize}
+    
+        \item nginx (PID: 2134, User: www-data)
+    
+        \item sshd (PID: 1020, User: root)
+    
+        \item clamd (PID: 4521, User: clamav)
+    
+\end{itemize}
+
+\subsection*{Endpoints \& Devices}
+\begin{itemize}
+    
+        \item Printer — HP-LaserJet-203 (Status: online)
+    
+        \item NAS — storage-01.local (Status: mounted)
+    
+\end{itemize}
+
+\subsection*{Active AV / EDR}
+\begin{itemize}
+    
+        \item ClamAV — Version: 0.103.2
+    
+\end{itemize}
+
+\subsection*{Misconfigurations Detected}
+\begin{itemize}
+    
+        \item Public directory with world-readable files: /home/test/public
+    
+        \item SMB fallback to SMBv1 supported on Samba (legacy protocol enabled)
+    
+\end{itemize}
+
+\newpage
+
+
+% Findings & Analysis
+\section*{Findings \& Analysis}
+
+This section analyzes the data collected by the Red Team AI Malware Simulator, highlights critical issues, and provides context for the AI’s actions and attack outcomes. It focuses on risk assessment and patterns identified during the simulation.
+
+\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{3cm}|}
+\hline
+\textbf{Finding / Issue} & \textbf{Evidence / Data} & \textbf{Severity} & \textbf{Potential Impact if System Were Real} \\
+\hline
+
+Sensitive Files in Public Directory & Files detected in /home/test/public/FinancialData.xlsx & Critical & Confidential data exposure; risk of exfiltration \\
+\hline
+
+Open SMB Port & Port 445 open on host; Samba 4.11 with SMBv1 support & High & Could allow remote exploitation and lateral movement \\
+\hline
+
+Outdated nginx & nginx 1.18.0 detected (CVE-2021-23017 present) & Medium & Information disclosure via known vulnerability \\
+\hline
+
+World-readable public directory & /home/test/public directory has global read permissions & High & Exposure of sensitive files to unauthenticated users \\
+\hline
+
+\end{longtable}
+
+\newpage
+
+
+% Evasion Metrics
+\section*{Evasion Metrics}
+
+\textbf{Purpose:} This section measures the effectiveness of the Evasion AI in avoiding detection by simulated defenses. It is objective and metric-focused — no interpretation or recommendations are provided here.
+
+\vspace{0.3cm}
+\textbf{Detection mechanisms tested:}
+\begin{itemize}
+    
+        
+            \item Signature-based AV
+        
+            \item Host telemetry (process creation logging)
+        
+            \item Network IDS (basic)
+        
+            \item File integrity monitoring (basic)
+        
+    
+\end{itemize}
+
+\textbf{AV / EDR presence (detected on system):}
+\begin{itemize}
+    
+        
+            \item ClamAV — v0.103.2 (signature-based scanning, periodic updates)
+        
+    
+\end{itemize}
+
+\textbf{VM / Sandbox detection indicators:}
+\begin{itemize}
+    
+        \item No conclusive VM/sandbox detection heuristics triggered; minor timing-based heuristics observed
+    
+\end{itemize}
+
+\textbf{Monitoring / Logging mechanisms observed:}
+\begin{itemize}
+    
+        
+            \item syslog forwarded to central server
+        
+            \item process creation audit rules enabled
+        
+            \item basic netflow collection
+        
+    
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Evasion success summary:} \\
+Overall Success Rate: \textbf{ 85\% }  
+(The payload avoided detection in 85\% of recorded checks.)
+
+\vspace{0.3cm}
+\textbf{Success by defense type:}
+\begin{longtable}{|p{6.5cm}|p{3cm}|}
+\hline
+\textbf{Defense Type} & \textbf{Success Rate (\%)} \\
+\hline
+
+    
+Signature-based AV & 90 \\
+\hline
+    
+Process-creation detection & 78 \\
+\hline
+    
+Network IDS & 82 \\
+\hline
+    
+File integrity monitoring & 75 \\
+\hline
+    
+
+\end{longtable}
+
+\vspace{0.3cm}
+
+
+\vspace{0.3cm}
+\textbf{Actions skipped or delayed by Evasion AI:} \\
+\begin{itemize}
+    
+        
+            \item Credential dumping (skipped due to high detection risk)
+        
+            \item Local privilege escalation exploit (skipped; unsafe in lab)
+        
+    
+\end{itemize}
+
+\newpage
+
+
+% Attack Simulation Summary
+\section*{Attack Simulation Summary}
+
+\textbf{Purpose:} This section summarizes the actions executed by the simulated malware, including their outcomes and prioritization. It provides an overview of what was attempted, what succeeded or failed, and how the AI prioritized each action.
+
+\vspace{0.3cm}
+\textbf{Actions Executed:} The table below lists all simulated attack actions performed by the Red Team AI Malware Simulator. Each action includes a description, the outcome, and its priority or importance score as determined by the Recon Prioritization AI.
+
+\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{2cm}|}
+\hline
+\textbf{Action Name} & \textbf{Description} & \textbf{Outcome} & \textbf{Priority / Score} \\
+\hline
+
+    
+Dummy file exfiltration & Simulated exfiltration of non-sensitive placeholder files to a benign sink; no actual data exfiltration performed. & Success & 8 \\
+\hline
+    
+Simulated lateral movement & Attempted lateral movement via discovered SMB share; simulation used inert probes only. & Failed & 6 \\
+\hline
+    
+Privilege escalation (simulated) & Simulated attempt to escalate privileges; full exploit not executed; check for vulnerable services and config. & Skipped & 9 \\
+\hline
+    
+
+\end{longtable}
+
+\newpage
+
+
+% LLM Based Mitigations
+\section*{LLM Based Mitigations}
+
+\textbf{Purpose:} This section uses a pre-trained Large Language Model (LLM) to analyze the collected simulation data and generate recommended mitigations for the findings. It provides a concise “briefing for action” rather than a deep technical manual.
+
+\vspace{0.3cm}
+\textbf{Note on LLM Limitations:}  
+\begin{itemize}
+    \item Recommendations are based solely on the simulation data provided.
+    \item The LLM may not capture every nuance of real-world system configurations or risks.
+    \item Human verification and contextual analysis are recommended before applying any mitigations.
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Recommended Mitigations:}
+\begin{itemize}
+
+    
+    \item Remove sensitive files from public directories and enforce least-privilege ACLs on /home/test/public.
+    
+    \item Disable SMBv1 support on Samba and apply vendor patches; restrict SMB to internal subnets only.
+    
+    \item Update nginx to the latest stable version and apply security patches (address CVE-2021-23017).
+    
+    \item Ensure AV signatures are up-to-date and configure more frequent scans; enable behavioral rules where possible.
+    
+    \item Harden logging and monitoring: add host-based EDR with behavior analysis and centralize alerts for correlation.
+    
+    \item Review user privileges; remove unused privileged accounts and enable multi-factor authentication for admin users.
+    
+
+\end{itemize}
+
+\newpage
+
+
+% Raw Data
+\section*{Raw Data}
+\begin{verbatim}
+{
+  "target_name": "test-server",
+  "generated_at": "2025-10-11T16:40:00Z",
+  "sim_start": "2025-10-11 14:00",
+  "sim_end": "2025-10-11 16:30",
+  "exec_summary": {
+    "purpose": "This simulation assessed the security posture of the target system and tested its defenses against a controlled AI-driven malware attack.",
+    "open_ports_list": [
+      "22 (SSH) - OpenSSH 8.2p1",
+      "80 (HTTP) - nginx 1.18.0",
+      "445 (SMB) - Samba 4.11 (SMBv1 detected)"
+    ],
+    "sensitive_data_list": [
+      "/home/test/public/FinancialData.xlsx",
+      "/etc/credentials/backup_creds.txt"
+    ],
+    "evasion_success": 85,
+    "av_list": [
+      "ClamAV 0.103.2 (signature-based)",
+      "OS-integrated agent (basic telemetry)"
+    ],
+    "overall_risk": "Medium",
+    "evasion_ai": 85,
+    "recon_ai": 92,
+    "attack_ai": 76
+  },
+  "scope": {
+    "techniques": "Standard AI simulation, benign telemetry generation, lab-scoped scanning techniques. Passive discovery, consented active scanning, simulated C2 exchanges, and non-persistent dummy actions.",
+    "phases": [
+      "Phase 1 - Reconnaissance (Passive & Active Collection)",
+      "Phase 2 - C2 Simulation & Dummy Actions (Controlled Emulation)",
+      "Phase 3 - Reporting & Analysis"
+    ],
+    "ai_models": [
+      {
+        "name": "Evasion AI",
+        "role": "Payload-side model that adapts actions to reduce detection signals observed from simulated detectors."
+      },
+      {
+        "name": "Recon Prioritisation AI",
+        "role": "Server-side model that ranks reconnaissance findings by risk and operational relevance."
+      },
+      {
+        "name": "Attack Decision AI",
+        "role": "Server-side planner that selects the next simulated action based on priorities and evasion feedback."
+      }
+    ]
+  },
+  "recon_data": {
+    "os_name": "Ubuntu",
+    "os_version": "22.04.1 LTS",
+    "architecture": "64bit",
+    "patches": [
+      "2025-09-10: kernel security update",
+      "2025-09-20: openssl patch"
+    ],
+    "installed_software": [
+      "nginx 1.18.0",
+      "OpenSSH 8.2p1",
+      "Samba 4.11",
+      "Python 3.10.12",
+      "Docker 20.10"
+    ],
+    "privileged_accounts": [
+      "root",
+      "admin"
+    ],
+    "active_users": [
+      "root",
+      "testuser",
+      "svc-backup"
+    ],
+    "default_creds": "None detected",
+    "network_ips": [
+      "192.168.50.10"
+    ],
+    "subnets": [
+      "192.168.50.0/24"
+    ],
+    "firewalls": [
+      "ufw (default deny incoming, open ports: 22,80,445)"
+    ],
+    "vpn_dmz": "DMZ present for web-facing hosts; internal admin subnet protected via VPN",
+    "open_ports": [
+      {
+        "number": 22,
+        "protocol": "tcp",
+        "service_name": "ssh",
+        "version": "OpenSSH 8.2p1",
+        "vulns": []
+      },
+      {
+        "number": 80,
+        "protocol": "tcp",
+        "service_name": "http",
+        "version": "nginx 1.18.0",
+        "vulns": [
+          "CVE-2021-23017"
+        ]
+      },
+      {
+        "number": 445,
+        "protocol": "tcp",
+        "service_name": "smb",
+        "version": "Samba 4.11",
+        "vulns": [
+          "CVE-2017-7494"
+        ]
+      }
+    ],
+    "processes": [
+      {
+        "name": "nginx",
+        "pid": 2134,
+        "user": "www-data"
+      },
+      {
+        "name": "sshd",
+        "pid": 1020,
+        "user": "root"
+      },
+      {
+        "name": "clamd",
+        "pid": 4521,
+        "user": "clamav"
+      }
+    ],
+    "connected_devices": [
+      {
+        "type": "Printer",
+        "identifier": "HP-LaserJet-203",
+        "status": "online"
+      },
+      {
+        "type": "NAS",
+        "identifier": "storage-01.local",
+        "status": "mounted"
+      }
+    ],
+    "active_av": [
+      {
+        "name": "ClamAV",
+        "version": "0.103.2"
+      }
+    ],
+    "misconfigurations": [
+      "Public directory with world-readable files: /home/test/public",
+      "SMB fallback to SMBv1 supported on Samba (legacy protocol enabled)"
+    ]
+  },
+  "findings": [
+    {
+      "name": "Sensitive Files in Public Directory",
+      "evidence": "Files detected in /home/test/public/FinancialData.xlsx",
+      "severity": "Critical",
+      "impact": "Confidential data exposure; risk of exfiltration"
+    },
+    {
+      "name": "Open SMB Port",
+      "evidence": "Port 445 open on host; Samba 4.11 with SMBv1 support",
+      "severity": "High",
+      "impact": "Could allow remote exploitation and lateral movement"
+    },
+    {
+      "name": "Outdated nginx",
+      "evidence": "nginx 1.18.0 detected (CVE-2021-23017 present)",
+      "severity": "Medium",
+      "impact": "Information disclosure via known vulnerability"
+    },
+    {
+      "name": "World-readable public directory",
+      "evidence": "/home/test/public directory has global read permissions",
+      "severity": "High",
+      "impact": "Exposure of sensitive files to unauthenticated users"
+    }
+  ],
+  "evasion": {
+    "detection_mechanisms": [
+      "Signature-based AV",
+      "Host telemetry (process creation logging)",
+      "Network IDS (basic)",
+      "File integrity monitoring (basic)"
+    ],
+    "av_edr": [
+      {
+        "name": "ClamAV",
+        "version": "0.103.2",
+        "notes": "signature-based scanning, periodic updates"
+      }
+    ],
+    "vm_detection": "No conclusive VM/sandbox detection heuristics triggered; minor timing-based heuristics observed",
+    "monitoring": [
+      "syslog forwarded to central server",
+      "process creation audit rules enabled",
+      "basic netflow collection"
+    ],
+    "overall_success": 85,
+    "per_defense": [
+      {
+        "defense": "Signature-based AV",
+        "success_rate": 90
+      },
+      {
+        "defense": "Process-creation detection",
+        "success_rate": 78
+      },
+      {
+        "defense": "Network IDS",
+        "success_rate": 82
+      },
+      {
+        "defense": "File integrity monitoring",
+        "success_rate": 75
+      }
+    ],
+    "skipped": [
+      "Credential dumping (skipped due to high detection risk)",
+      "Local privilege escalation exploit (skipped; unsafe in lab)"
+    ]
+  },
+  "charts": {
+    "evasion_chart": "evasion_chart.png"
+  },
+  "attacks": [
+    {
+      "name": "Dummy file exfiltration",
+      "description": "Simulated exfiltration of non-sensitive placeholder files to a benign sink; no actual data exfiltration performed.",
+      "outcome": "Success",
+      "priority": 8
+    },
+    {
+      "name": "Simulated lateral movement",
+      "description": "Attempted lateral movement via discovered SMB share; simulation used inert probes only.",
+      "outcome": "Failed",
+      "priority": 6
+    },
+    {
+      "name": "Privilege escalation (simulated)",
+      "description": "Simulated attempt to escalate privileges; full exploit not executed; check for vulnerable services and config.",
+      "outcome": "Skipped",
+      "priority": 9
+    }
+  ],
+  "mitigations": [
+    "Remove sensitive files from public directories and enforce least-privilege ACLs on /home/test/public.",
+    "Disable SMBv1 support on Samba and apply vendor patches; restrict SMB to internal subnets only.",
+    "Update nginx to the latest stable version and apply security patches (address CVE-2021-23017).",
+    "Ensure AV signatures are up-to-date and configure more frequent scans; enable behavioral rules where possible.",
+    "Harden logging and monitoring: add host-based EDR with behavior analysis and centralize alerts for correlation.",
+    "Review user privileges; remove unused privileged accounts and enable multi-factor authentication for admin users."
+  ]
+}
+\end{verbatim}
+
+\end{document}
