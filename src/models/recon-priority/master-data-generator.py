@@ -9,8 +9,8 @@ import csv
 import random
 
 # ---------------- CONFIG ----------------
-HEALTH_JSON  = "master-health-data.json"
-FINANCE_JSON = "master-finance-data.json"
+HEALTH_JSON  = "master-health-data-binary.json"
+FINANCE_JSON = "master-finance-data-binary.json"
 MASTER_JSON  = "master-data.json"
 MASTER_CSV   = "master-data.csv"
 RANDOM_SEED  = 42

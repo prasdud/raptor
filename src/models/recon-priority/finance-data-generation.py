@@ -1,36 +1,23 @@
 #!/usr/bin/env python3
 """
-finance-data-generation.py
-Generate realistic synthetic finance/banking file-metadata for training Recon Priority AI.
-
-Features:
-- Realistic folder/extension correlations
-- Filename keywords correlated with sensitivity
-- Size/date distributions conditioned on extension & sensitivity
-- Configurable class imbalance and dataset size
-- Small percentage of label noise (mislabels) to simulate real data
-- Outputs JSON and CSV
+finance-data-generation-binary.py
+Generate realistic synthetic finance/banking file-metadata for training a sensitive/not-sensitive classifier.
 """
 
-import json
-import csv
-import random
-import datetime
+import json, csv, random, datetime
 from collections import Counter
 
 # --------------------------- CONFIG ---------------------------
-NUM_ROWS = 10000
+NUM_ROWS = 25000
 RANDOM_SEED = 42
-OUTPUT_JSON = "master-finance-data.json"
-OUTPUT_CSV  = "master-finance-data.csv"
+OUTPUT_JSON = "master-finance-data-binary.json"
+OUTPUT_CSV  = "master-finance-data-binary.csv"
 
+# Binary sensitivity distribution
 TARGET_DISTRIBUTION = {
-    "high": 0.15,    # sensitive contracts, customer info
-    "medium": 0.30,  # reports, internal memos
-    "low": 0.55      # public notices, general info
+    "sensitive": 0.30,   # ~30% sensitive
+    "not_sensitive": 0.70
 }
-
-LABEL_NOISE_FRACTION = 0.03
 
 FOLDERS = [
     'C:/Finance/Accounts/',
@@ -40,9 +27,8 @@ FOLDERS = [
     'C:/Finance/HR/',
     'C:/Finance/Reports/',
     'C:/Finance/Compliance/',
-    'C:/Finance/PublicInfo/Announcements/',
-    'C:/Finance/PublicInfo/Guidelines/',
-    'C:/Finance/Internal/Policies/'
+    'C:/Finance/PublicInfo/',
+    'C:/Finance/Internal/'
 ]
 
 EXT_BY_FOLDER = {
@@ -57,19 +43,13 @@ EXT_BY_FOLDER = {
     'Internal':     ['.docx', '.pdf', '.xlsx']
 }
 
-HIGH_KEYWORDS = [
+SENSITIVE_KEYWORDS = [
     "confidential","customer","ssn","account_number","pin","loan_contract",
     "salary","audit","passwords","tax_info","credit_report","bank_statement"
 ]
-MEDIUM_KEYWORDS = [
-    "report","summary","invoice","statement","transaction","memo","analysis","ledger"
-]
-LOW_KEYWORDS = [
-    "announcement","guidelines","policy","public_notice","menu","schedule","info"
-]
 
-DATE_START = datetime.datetime(2022, 1, 1, 0, 0, 0)
-DATE_END   = datetime.datetime(2025, 12, 31, 23, 59, 59)
+DATE_START = datetime.datetime(2022, 1, 1)
+DATE_END   = datetime.datetime(2025, 12, 31)
 
 random.seed(RANDOM_SEED)
 
@@ -77,169 +57,95 @@ random.seed(RANDOM_SEED)
 def weighted_choice(choices):
     total = sum(w for _, w in choices)
     r = random.random() * total
-    upto = 0.0
+    upto = 0
     for item, weight in choices:
-        if upto + weight >= r:
-            return item
+        if upto + weight >= r: return item
         upto += weight
     return choices[-1][0]
 
 def folder_key(folder_path):
     parts = [p for p in folder_path.split('/') if p]
-    for candidate in reversed(parts):
-        if candidate in EXT_BY_FOLDER:
-            return candidate
-    if len(parts) >= 2:
-        return parts[-2]
-    return parts[-1]
+    return parts[-1] if parts else 'Unknown'
 
-def pick_extension_for_folder(folder):
+def pick_extension(folder):
     key = folder_key(folder)
-    prefer = EXT_BY_FOLDER.get(key, ['.pdf', '.txt', '.csv', '.docx', '.xlsx', '.xls'])
-    weights = [(ext, max(1.0, 2.0 - 0.2 * i)) for i, ext in enumerate(prefer)]
+    exts = EXT_BY_FOLDER.get(key, ['.pdf','.txt','.csv','.docx','.xlsx'])
+    weights = [(ext, 1.0) for ext in exts]
     return weighted_choice(weights)
 
-def random_iso_date(start=DATE_START, end=DATE_END):
-    delta = int((end - start).total_seconds())
-    sec = random.randint(0, delta)
-    dt = start + datetime.timedelta(seconds=sec)
+def random_iso_date():
+    delta = int((DATE_END - DATE_START).total_seconds())
+    dt = DATE_START + datetime.timedelta(seconds=random.randint(0, delta))
     return dt.strftime("%Y-%m-%dT%H:%M:%S")
 
-def filesize_by_ext_and_sensitivity(ext, sensitivity):
+def filesize_by_ext_and_sensitivity(ext, sensitive):
     ext = ext.lower()
-    if ext in ('.txt',):
-        base = random.randint(1, 150)
-    elif ext in ('.csv',):
-        base = int(random.gauss(300, 250))
-    elif ext in ('.xls', '.xlsx'):
-        base = int(random.gauss(700, 800))
-    elif ext in ('.pdf',):
-        base = int(random.gauss(800, 900))
-    elif ext in ('.docx',):
-        base = int(random.gauss(400, 350))
-    else:
-        base = int(random.gauss(400, 500))
-    if sensitivity == "high":
-        adj = abs(int(random.gauss(1.15, 0.05) * base))
-    elif sensitivity == "medium":
-        adj = abs(int(random.gauss(1.0, 0.08) * base))
-    else:
-        adj = abs(int(random.gauss(0.85, 0.1) * base))
-    return max(1, min(adj, 10_000))
+    if ext=='.txt': base=random.randint(1,150)
+    elif ext=='.csv': base=int(random.gauss(300,250))
+    elif ext in ('.xls','.xlsx'): base=int(random.gauss(700,800))
+    elif ext=='.pdf': base=int(random.gauss(800,900))
+    elif ext=='.docx': base=int(random.gauss(400,350))
+    else: base=int(random.gauss(400,500))
+    factor = 1.15 if sensitive else 0.9
+    adj = abs(int(random.gauss(factor, 0.05)*base))
+    return max(1, min(adj, 10000))
 
-def choose_sensitivity_for_row(folder, extension, filename_keywords):
-    base = TARGET_DISTRIBUTION.copy()
+def choose_sensitive(folder, ext, keywords):
+    probs = TARGET_DISTRIBUTION.copy()
     key = folder_key(folder)
-    if key in ("Customers", "Loans", "Accounts"):
-        base['high'] += 0.10
-        base['low']  -= 0.06
-    elif "PublicInfo" in key:
-        base['low'] += 0.12
-        base['high'] -= 0.06
-    elif key in ("HR", "Reports", "Compliance"):
-        base['low'] += 0.06
-        base['medium'] += 0.02
-    for kw in filename_keywords:
-        if kw in HIGH_KEYWORDS:
-            base['high'] += 0.15
-            base['low']  -= 0.08
-        elif kw in MEDIUM_KEYWORDS:
-            base['medium'] += 0.05
-            base['low'] -= 0.02
-        elif kw in LOW_KEYWORDS:
-            base['low'] += 0.08
-            base['high'] -= 0.03
-    for k in base:
-        base[k] = max(base[k], 0.0)
-    s = sum(base.values())
-    if s <= 0:
-        base = TARGET_DISTRIBUTION.copy()
-        s = sum(base.values())
-    probs = {k: v / s for k, v in base.items()}
-    choices = list(probs.items())
-    return weighted_choice(choices)
+    # "Customers", "Loans", "Accounts" more likely sensitive
+    if key in ("Customers","Loans","Accounts"):
+        probs['sensitive'] += 0.15
+        probs['not_sensitive'] -= 0.15
+    # Keywords boost
+    for kw in keywords:
+        if kw in SENSITIVE_KEYWORDS:
+            probs['sensitive'] += 0.20
+            probs['not_sensitive'] -= 0.20
+    # Normalize
+    total = sum(probs.values())
+    probs = {k: max(v/total,0) for k,v in probs.items()}
+    return weighted_choice(list(probs.items()))
 
-def generate_filename(folder, extension, idx):
+def generate_filename(folder, ext, idx):
     key = folder_key(folder)
-    base_tokens = {
-        'Accounts': ['ledger','balance','account','audit'],
-        'Customers': ['customer','profile','info','contract'],
-        'Loans': ['loan','agreement','repayment','contract'],
-        'Transactions': ['transaction','transfer','statement','summary'],
-        'HR': ['payroll','salary','roster','report'],
-        'Reports': ['report','analysis','summary','memo'],
-        'Compliance': ['policy','guideline','audit','review'],
-        'PublicInfo': ['announcement','notice','info','schedule'],
-        'Internal': ['procedure','policy','protocol','guideline']
-    }
-    tokens = base_tokens.get(key, [key.lower()])
-    p = random.random()
-    keywords = []
-    if p < 0.08:
-        kw = random.choice(HIGH_KEYWORDS)
-        keywords.append(kw)
-    elif p < 0.28:
-        kw = random.choice(MEDIUM_KEYWORDS)
-        keywords.append(kw)
-    elif p < 0.55:
-        kw = random.choice(LOW_KEYWORDS)
-        keywords.append(kw)
-    base = random.choice(tokens)
-    filename_body = f"{base}_{idx:04d}"
-    if random.random() < 0.12:
-        filename_body += "_" + random.choice(['final','v2','draft','archived','confidential'])
-    if keywords and random.random() < 0.9:
-        filename_body = f"{keywords[0]}_{filename_body}"
-    return filename_body + extension, keywords
+    tokens = {
+        'Accounts':['ledger','balance','account','audit'],
+        'Customers':['customer','profile','info','contract'],
+        'Loans':['loan','agreement','repayment','contract'],
+        'Transactions':['transaction','transfer','statement','summary'],
+        'HR':['payroll','salary','roster','report'],
+        'Reports':['report','analysis','summary','memo'],
+        'Compliance':['policy','guideline','audit','review'],
+        'PublicInfo':['announcement','notice','info','schedule'],
+        'Internal':['procedure','policy','protocol','guideline']
+    }.get(key,[key.lower()])
+    base=random.choice(tokens)
+    keywords=[]
+    if random.random()<0.15: keywords=[random.choice(SENSITIVE_KEYWORDS)]
+    filename_body=f"{base}_{idx:04d}"
+    if keywords: filename_body=f"{keywords[0]}_{filename_body}"
+    return filename_body+ext, keywords
 
 # ------------------------ MAIN GENERATOR -----------------------
 def generate_dataset(num_rows=NUM_ROWS):
-    rows = []
-    counts_target = {k: int(num_rows * v) for k, v in TARGET_DISTRIBUTION.items()}
-    remaining = num_rows - sum(counts_target.values())
-    counts_target['low'] += remaining
+    rows=[]
     for i in range(num_rows):
-        folder = random.choice(FOLDERS)
-        ext = pick_extension_for_folder(folder)
-        fname, keywords = generate_filename(folder, ext, i)
-        sensitivity = choose_sensitivity_for_row(folder, ext, keywords)
-        filesize = filesize_by_ext_and_sensitivity(ext, sensitivity)
+        folder=random.choice(FOLDERS)
+        ext=pick_extension(folder)
+        fname, keywords=generate_filename(folder, ext, i)
+        sensitive = choose_sensitive(folder, ext, keywords)
+        filesize = filesize_by_ext_and_sensitivity(ext, sensitive=='sensitive')
         date_modified = random_iso_date()
-        row = {
+        rows.append({
             "filename": fname,
             "extension": ext,
             "filesize_kb": filesize,
             "file_path": folder,
             "date_modified": date_modified,
-            "sensitivity": sensitivity
-        }
-        rows.append(row)
-    # enforce rough target distribution
-    counts = Counter(r['sensitivity'] for r in rows)
-    for cls, target_count in counts_target.items():
-        cur = counts.get(cls, 0)
-        if cur < target_count:
-            need = target_count - cur
-            candidates = []
-            for idx, r in enumerate(rows):
-                key = folder_key(r['file_path'])
-                if cls == 'high' and key in ('Customers','Loans','Accounts'):
-                    candidates.append(idx)
-                elif cls == 'low' and "PublicInfo" in key:
-                    candidates.append(idx)
-                elif cls == 'medium':
-                    candidates.append(idx)
-            random.shuffle(candidates)
-            for idx in candidates[:need]:
-                rows[idx]['sensitivity'] = cls
-            counts = Counter(r['sensitivity'] for r in rows)
-    num_noisy = int(len(rows) * LABEL_NOISE_FRACTION)
-    noisy_indices = random.sample(range(len(rows)), num_noisy)
-    label_choices = ['high','medium','low']
-    for idx in noisy_indices:
-        orig = rows[idx]['sensitivity']
-        alt = random.choice([c for c in label_choices if c != orig])
-        rows[idx]['sensitivity'] = alt
+            "sensitive": 1 if sensitive=='sensitive' else 0,
+            "keywords": keywords
+        })
     return rows
 
 def save_json(rows, path=OUTPUT_JSON):
@@ -247,27 +153,24 @@ def save_json(rows, path=OUTPUT_JSON):
         json.dump(rows, fh, indent=4, ensure_ascii=False)
 
 def save_csv(rows, path=OUTPUT_CSV):
-    if not rows:
-        return
-    keys = list(rows[0].keys())
+    if not rows: return
+    keys=list(rows[0].keys())
     with open(path,'w',newline='',encoding='utf-8') as fh:
-        writer = csv.DictWriter(fh, fieldnames=keys)
+        writer=csv.DictWriter(fh, fieldnames=keys)
         writer.writeheader()
-        for r in rows:
-            writer.writerow(r)
+        for r in rows: writer.writerow(r)
 
 # --------------------------- RUN -------------------------------
-if __name__ == "__main__":
+if __name__=="__main__":
     print(f"Generating {NUM_ROWS} rows for Finance/Banking (seed={RANDOM_SEED})...")
     dataset = generate_dataset(NUM_ROWS)
-    dist = Counter(r['sensitivity'] for r in dataset)
-    print("Sensitivity distribution:")
-    for k in ['high','medium','low']:
-        print(f"  {k:6s} : {dist.get(k,0):6d} ({100.0*dist.get(k,0)/len(dataset):.2f}%)")
+    dist = Counter(r['sensitive'] for r in dataset)
+    print("Sensitive distribution:")
+    print(f"  Sensitive     : {dist.get(1,0)} ({100*dist.get(1,0)/len(dataset):.2f}%)")
+    print(f"  Not Sensitive : {dist.get(0,0)} ({100*dist.get(0,0)/len(dataset):.2f}%)")
     print("\nSample rows (5):")
-    for s in random.sample(dataset,5):
-        print(s)
+    for s in random.sample(dataset,5): print(s)
     print(f"\nSaving JSON to {OUTPUT_JSON} and CSV to {OUTPUT_CSV} ...")
-    save_json(dataset,OUTPUT_JSON)
-    save_csv(dataset,OUTPUT_CSV)
+    save_json(dataset)
+    save_csv(dataset)
     print("Done.")
