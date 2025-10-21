@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'scans',
     'report',
-    'reconpriority'
+    'reconpriority',
+    'attackdecision'
 ]
 
 MIDDLEWARE = [
