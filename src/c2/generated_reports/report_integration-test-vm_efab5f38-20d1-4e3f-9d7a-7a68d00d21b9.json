@@ -1,0 +1,168 @@
+{
+  "target_name": "integration-test-vm",
+  "generated_at": "2025-10-26T12:21:40Z",
+  "sim_start": "2025-10-26 12:21",
+  "sim_end": "2025-10-26 12:21",
+  "exec_summary": {
+    "purpose": "AI-driven penetration test simulation for security assessment",
+    "open_ports_list": [
+      "80 - Service detected",
+      "135 - Service detected",
+      "139 - Service detected",
+      "445 - Service detected",
+      "3389 - Service detected",
+      "5000 - Service detected",
+      "8080 - Service detected"
+    ],
+    "sensitive_data_list": [
+      "C:/Users/Admin/Documents/Finance/financial_report_2024.xlsx",
+      "C:/Users/Admin/Documents/HR/employee_salaries_confidential.csv",
+      "C:/Users/Admin/Documents/Medical/patient_records_2024.xlsx"
+    ],
+    "evasion_success": 85,
+    "av_list": [
+      "Windows Defender (signature-based)"
+    ],
+    "overall_risk": "High",
+    "evasion_ai": 85,
+    "recon_ai": 56,
+    "attack_ai": 70
+  },
+  "scope": {
+    "techniques": "Automated reconnaissance, AI-based file sensitivity analysis, intelligent attack planning",
+    "phases": [
+      "Phase 1 - System Reconnaissance",
+      "Phase 2 - AI-Powered Threat Analysis",
+      "Phase 3 - Attack Simulation & Reporting"
+    ],
+    "ai_models": [
+      {
+        "name": "Recon Prioritization AI",
+        "role": "Identifies sensitive files using LightGBM classifier (95% accuracy)"
+      },
+      {
+        "name": "Attack Decision AI",
+        "role": "Predicts optimal attack sequence based on environment state"
+      }
+    ]
+  },
+  "recon_data": {
+    "os_name": "Windows",
+    "os_version": "10.0.19044",
+    "os_release": "10",
+    "architecture": "64bit",
+    "hostname": "integration-test-vm",
+    "current_user": "Administrator",
+    "machine": "AMD64",
+    "processor": "Intel Core i7",
+    "is_admin": true,
+    "open_ports": [
+      {
+        "number": 80,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 135,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 139,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 445,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 3389,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 5000,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      },
+      {
+        "number": 8080,
+        "protocol": "tcp",
+        "service_name": "unknown",
+        "version": "N/A",
+        "vulns": []
+      }
+    ],
+    "env_vars_count": 5,
+    "installed_software": [],
+    "processes": []
+  },
+  "findings": [
+    {
+      "name": "Sensitive Files Detected",
+      "evidence": "3 high-sensitivity files found: financial_report_2024.xlsx, employee_salaries_confidential.csv, patient_records_2024.xlsx",
+      "severity": "Critical",
+      "impact": "Potential data exposure and exfiltration risk"
+    },
+    {
+      "name": "Elevated Privileges Detected",
+      "evidence": "Payload running with administrator rights as user 'Administrator'",
+      "severity": "High",
+      "impact": "Full system compromise possible"
+    },
+    {
+      "name": "Multiple Open Ports",
+      "evidence": "7 ports detected: 80, 135, 139, 445, 3389, 5000, 8080",
+      "severity": "Medium",
+      "impact": "Increased attack surface for network-based attacks"
+    },
+    {
+      "name": "Sensitive Environment Variables",
+      "evidence": "1 environment variables with potentially sensitive names detected",
+      "severity": "Medium",
+      "impact": "Possible credential or API key exposure"
+    }
+  ],
+  "evasion": {
+    "detection_mechanisms": [
+      "Signature-based AV",
+      "Host telemetry",
+      "Network IDS"
+    ],
+    "overall_success": 85,
+    "skipped": []
+  },
+  "attacks": [
+    {
+      "name": "privilege_escalation",
+      "description": "AI recommended action based on analysis (confidence: 70.00%)",
+      "outcome": "Simulated",
+      "priority": 7
+    }
+  ],
+  "mitigations": [
+    "Implement principle of least privilege - avoid running applications with admin rights",
+    "Encrypt sensitive files and restrict access with proper ACLs",
+    "Implement Data Loss Prevention (DLP) solutions to monitor sensitive data",
+    "Close unnecessary open ports and services",
+    "Implement network segmentation and firewall rules",
+    "Deploy endpoint detection and response (EDR) solution",
+    "Enable comprehensive logging and monitoring",
+    "Regular security awareness training for users",
+    "Conduct periodic vulnerability assessments and penetration tests"
+  ]
+}

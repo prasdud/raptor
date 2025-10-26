@@ -3,7 +3,6 @@ import json
 import datetime
 import subprocess
 import tempfile
-import matplotlib.pyplot as plt
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -22,6 +21,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_chart(data_list, labels, out_path, chart_type='pie', title=None):
     """Generate bar or pie chart and save as PNG"""
+    # Lazy import matplotlib only when needed
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    
     plt.figure(figsize=(6,3))
     if chart_type == 'pie':
         plt.pie(data_list, labels=labels, autopct='%1.1f%%', colors=['#ff6b6b','#4b0082','#ffb347'])
