@@ -3,9 +3,11 @@ Pipeline Orchestrator - Coordinates the complete pentest workflow
 Automatically processes: Recon → AI Analysis → Attack Planning → Report Generation
 """
 import json
+import os
 import requests
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
 
 
 class PipelineOrchestrator:
@@ -517,8 +519,9 @@ class PipelineOrchestrator:
             report_filename = f"RedTeamReport_{self.master_data['target_name']}_{self.session.session_id}.pdf"
             report_path = f"generated_reports/{report_filename}"
             
-            import os
-            full_path = os.path.join('/home/prasdud/playground/raptor/src/c2', report_path)
+            # Use Django BASE_DIR for proper path resolution
+            full_path = os.path.join(settings.BASE_DIR, report_path)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
             
             with open(full_path, 'wb') as f:
                 f.write(response.content)
@@ -531,8 +534,9 @@ class PipelineOrchestrator:
             report_filename = f"report_{self.master_data['target_name']}_{self.session.session_id}.json"
             report_path = f"generated_reports/{report_filename}"
             
-            import os
-            full_path = os.path.join('/home/prasdud/playground/raptor/src/c2', report_path)
+            # Use Django BASE_DIR for proper path resolution
+            full_path = os.path.join(settings.BASE_DIR, report_path)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
             
             with open(full_path, 'w') as f:
                 json.dump(self.master_data, f, indent=2)
