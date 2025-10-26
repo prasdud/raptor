@@ -4,8 +4,9 @@
 # Quick Test Script for Cloud Deployment
 # Tests connectivity to your deployed RAPTOR C2 server
 #
-# Usage: ./test_cloud_deployment.sh <your-vps-url>
-# Example: ./test_cloud_deployment.sh https://raptor.yourdomain.com
+# Usage: ./test_cloud_deployment.sh <your-vps-ip-or-domain>
+# Example: ./test_cloud_deployment.sh 123.45.67.89
+# Example: ./test_cloud_deployment.sh raptor.yourdomain.com
 ##############################################################################
 
 set -e
@@ -18,13 +19,19 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 if [ -z "$1" ]; then
-    echo -e "${RED}Usage: $0 <c2-server-url>${NC}"
-    echo "Example: $0 https://raptor.yourdomain.com"
-    echo "Example: $0 http://123.45.67.89"
+    echo -e "${RED}Usage: $0 <vps-ip-or-domain>${NC}"
+    echo "Example: $0 123.45.67.89"
+    echo "Example: $0 raptor.yourdomain.com"
     exit 1
 fi
 
-C2_URL="$1"
+# Auto-detect http/https
+if [[ "$1" == http* ]]; then
+    C2_URL="$1"
+else
+    C2_URL="http://$1"
+fi
+
 API_ENDPOINT="${C2_URL}/api/submit_scan/"
 
 echo -e "${BLUE}╔════════════════════════════════════════════════╗${NC}"
