@@ -1,54 +1,30 @@
-# 🚀 RAPTOR: Red Team AI-Powered Penetration Testing Simulator# Red Team AI Malware Simulator - RAPTOR
+# 🚀 RAPTOR: Red Team AI-Powered Penetration Testing Simulator
 
-
-
-**Status:** ✅ Fully Operational | **Version:** 2.0 Enhanced  ## Overview
+**Status:** ✅ Fully Operational | **Version:** 2.0 Enhanced | ☁️ **Cloud-Ready**
 
 An AI-driven penetration testing framework for educational purposes and security research.
 
-The **Red Team AI Malware Simulator** is a controlled simulation framework designed for cybersecurity professionals to test and study malware behaviors in a safe and isolated environment. It emulates advanced attack techniques and decision-making logic of real-world malware, allowing red teamers and security researchers to analyze attack strategies, system vulnerabilities, and defense mechanisms.
-
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-
-![Django](https://img.shields.io/badge/django-5.2.5-green.svg)This project combines **AI-driven intelligence** with traditional malware simulation, providing insights into adaptive malware behavior and response strategies.
-
+![Django](https://img.shields.io/badge/django-5.2.5-green.svg)
 ![Tests](https://img.shields.io/badge/tests-33%2F33%20passing-brightgreen.svg)
+![License](https://img.shields.io/badge/license-Educational-orange.svg)
 
-![License](https://img.shields.io/badge/license-Educational-orange.svg)---
+---
 
+## 🎯 What is RAPTOR?
 
-
----## Key Features
-
-
-
-## 🎯 What is RAPTOR?### 1. AI-Powered Decision Making
-
-- **Evasion AI:** Detects sandboxing, virtual machines, and monitoring tools to avoid detection.
-
-RAPTOR is a complete Command & Control (C2) framework that demonstrates how AI can be integrated into penetration testing workflows. It features **automated reconnaissance**, **AI-based decision-making** for attack planning, **intelligent file sensitivity analysis**, and **automated report generation**.- **Recon Prioritization AI:** Scores and ranks discovered system information to focus on high-value targets.
-
-- **Attack Decision AI:** Determines the optimal sequence of attack actions based on system environment and previous findings.
+RAPTOR is a complete Command & Control (C2) framework that demonstrates how AI can be integrated into penetration testing workflows. It features **automated reconnaissance**, **AI-based decision-making** for attack planning, **intelligent file sensitivity analysis**, and **automated report generation**.
 
 ### ✨ Key Features
 
-### 2. Controlled Simulation
-
-- ✅ **AI-Driven File Sensitivity Analysis** - LightGBM classifier (95% accuracy)- Runs in a **sandboxed environment** to prevent any real-world damage.
-
-- ✅ **Automated Attack Decision Making** - AI determines optimal attack sequence  - Fully configurable to simulate various target scenarios (e.g., Windows 10, Linux).
-
+- ✅ **AI-Driven File Sensitivity Analysis** - LightGBM classifier (95% accuracy)
+- ✅ **Automated Attack Decision Making** - AI determines optimal attack sequence  
 - ✅ **Enhanced File Enumeration** - Comprehensive filesystem reconnaissance (500+ files)
-
-- ✅ **Pipeline Automation** - Complete workflow from payload → PDF report### 3. Reconnaissance & Intelligence Gathering
-
-- ✅ **Session Tracking** - UUID-based monitoring with real-time status- Scans system for:
-
-- ✅ **Comprehensive Reporting** - Automated PDF/JSON generation  - Open ports
-
-- ✅ **Intelligent Fallbacks** - Works even when AI endpoints offline  - Running processes
-
-  - Sensitive files and directories
+- ✅ **Pipeline Automation** - Complete workflow from payload → PDF report
+- ✅ **Session Tracking** - UUID-based monitoring with real-time status
+- ✅ **Comprehensive Reporting** - Automated PDF/JSON generation  
+- ✅ **Intelligent Fallbacks** - Works even when AI endpoints offline
+- ✅ **☁️ Cloud Deployment Ready** - Deploy C2 to VPS, run payload on remote VMs
 
 ---  - Installed software and configurations
 
