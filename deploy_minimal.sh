@@ -29,9 +29,11 @@ echo ""
 echo "Configuring Django..."
 cd src/c2
 
-# Update ALLOWED_HOSTS
+# Update ALLOWED_HOSTS and STATIC_ROOT
 python3 << EOF
 import re
+import os
+
 with open('c2/settings.py', 'r') as f:
     content = f.read()
 
@@ -43,9 +45,19 @@ content = re.sub(
     flags=re.DOTALL
 )
 
+# Add STATIC_ROOT if not present
+if 'STATIC_ROOT' not in content:
+    static_root_line = "\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n"
+    # Add after STATIC_URL
+    content = re.sub(
+        r"(STATIC_URL = ['\"].*?['\"])",
+        r"\1" + static_root_line,
+        content
+    )
+
 with open('c2/settings.py', 'w') as f:
     f.write(content)
-print("✓ Updated ALLOWED_HOSTS")
+print("✓ Updated ALLOWED_HOSTS and STATIC_ROOT")
 EOF
 
 # Run migrations
