@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.3)  14 OCT 2025 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.3)  26 OCT 2025 19:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -667,59 +667,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:138: Missing $ inserted.
-<inserted text> 
-                $
-l.138 ...m \textbf{Evasion Success Rate:} {{ exec_
-                                                  summary.evasion_success | ...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 138.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 138.
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:138: Extra }, or forgotten $.
-l.138 ...ec_summary.evasion_success | default(0) }
-                                                  }\%
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:138: Extra }, or forgotten $.
-l.138 ...c_summary.evasion_success | default(0) }}
-                                                  \%
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:139: Missing $ inserted.
-<inserted text> 
-                $
-l.139 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:139: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:145: Missing } inserted.
 <inserted text> 
                 }
-l.139 
-      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Missing } inserted.
-<inserted text> 
-                }
-l.147     \end{itemize}
+l.145     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -727,10 +678,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:145: Missing } inserted.
 <inserted text> 
                 }
-l.147     \end{itemize}
+l.145     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -738,10 +689,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:145: Missing } inserted.
 <inserted text> 
                 }
-l.147     \end{itemize}
+l.145     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -749,16 +700,20 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:149: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Missing $ inserted.
 <inserted text> 
                 $
-l.149 ...textbf{Overall Risk Assessment:} {{ exec_
+l.147 ...textbf{Overall Risk Assessment:} {{ exec_
                                                   summary.overall_risk | def...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:149: Extra }, or forgotten $.
-l.149 ...c_summary.overall_risk | default("Low") }
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 147.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 147.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Extra }, or forgotten $.
+l.147 ...c_summary.overall_risk | default("Low") }
                                                   }
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -766,8 +721,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:149: Extra }, or forgotten $.
-l.149 ..._summary.overall_risk | default("Low") }}
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:147: Extra }, or forgotten $.
+l.147 ..._summary.overall_risk | default("Low") }}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -776,45 +731,45 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: LaTeX Error: Command \end{itemize} invalid in math mode.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: LaTeX Error: Command \end{itemize} invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: Missing $ inserted.
 <inserted text> 
                 $
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -822,10 +777,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: Missing } inserted.
 <inserted text> 
                 }
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -833,21 +788,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:148: Missing } inserted.
 <inserted text> 
                 }
-l.150 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:150: Missing } inserted.
-<inserted text> 
-                }
-l.150 \end{itemize}
+l.148 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -856,30 +800,30 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 
  []
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:153: Missing $ inserted.
 <inserted text> 
                 $
-l.155     \item \textbf{Evasion AI:} {{ exec_
-                                             summary.evasion_ai | default(0)...
+l.153 ...textbf{Recon Prioritisation AI:} {{ exec_
+                                                  summary.recon_ai | default...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Extra }, or forgotten $.
-l.155 ...{{ exec_summary.evasion_ai | default(0) }
-                                                  }\% — Successfully evade...
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:153: Extra }, or forgotten $.
+l.153 ...} {{ exec_summary.recon_ai | default(0) }
+                                                  }\% — Correctly prioriti...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Extra }, or forgotten $.
-l.155 ...{ exec_summary.evasion_ai | default(0) }}
-                                                  \% — Successfully evaded...
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:153: Extra }, or forgotten $.
+l.153 ... {{ exec_summary.recon_ai | default(0) }}
+                                                  \% — Correctly prioritiz...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -887,152 +831,87 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-LaTeX Warning: Command \textemdash invalid in math mode on input line 155.
+LaTeX Warning: Command \textemdash invalid in math mode on input line 153.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:156: LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.156     \item
-                \textbf{Recon Prioritisation AI:} {{ exec_summary.recon_ai |...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:156: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:154: LaTeX Error: Command \item invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156     \item \textbf
-                       {Recon Prioritisation AI:} {{ exec_summary.recon_ai |...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:156: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.156     \item \textbf
-                       {Recon Prioritisation AI:} {{ exec_summary.recon_ai |...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Command \textemdash invalid in math mode on input line 156.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.157     \item
+l.154     \item
                 \textbf{Attack Decision AI:} {{ exec_summary.attack_ai | def...
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: Missing $ inserted.
-<inserted text> 
-                $
-l.157     \item \textbf
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:154: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.154     \item \textbf
                        {Attack Decision AI:} {{ exec_summary.attack_ai | def...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: Missing } inserted.
-<inserted text> 
-                }
-l.157     \item \textbf
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:154: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.154     \item \textbf
                        {Attack Decision AI:} {{ exec_summary.attack_ai | def...
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (1018.03963pt too wide) in paragraph at lines 155--157
-[]\OT1/cmr/bx/n/12 Evasion AI:  \OT1/cmr/m/n/12 exec$[]\OML/cmm/m/it/12 ummary:evasion[]i\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 default\OT1/cmr/m/n/12 (0)%\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 Successfullyevadeddetectionfor[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofactions:[][]\OT1/cmr/m/n/12 %\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 Correctlyprioritized[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofreconnaissancefindings:[][]$ 
- []
+LaTeX Warning: Command \textemdash invalid in math mode on input line 154.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: Missing $ inserted.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.155 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.155 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.155 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Missing $ inserted.
 <inserted text> 
                 $
-l.157 ...tem \textbf{Attack Decision AI:} {{ exec_
-                                                  summary.attack_ai | defaul...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: Extra }, or forgotten $.
-l.157 ... {{ exec_summary.attack_ai | default(0) }
-                                                  }\% — Selected optimal a...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:157: Extra }, or forgotten $.
-l.157 ...{{ exec_summary.attack_ai | default(0) }}
-                                                  \% — Selected optimal at...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-LaTeX Warning: Command \textemdash invalid in math mode on input line 157.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: LaTeX Error: Command \end{itemize} invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.158 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.158 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.158 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: Missing $ inserted.
-<inserted text> 
-                $
-l.158 \end{itemize}
+l.155 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1040,10 +919,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Missing } inserted.
 <inserted text> 
                 }
-l.158 \end{itemize}
+l.155 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1051,21 +930,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:155: Missing } inserted.
 <inserted text> 
                 }
-l.158 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:158: Missing } inserted.
-<inserted text> 
-                }
-l.158 \end{itemize}
+l.155 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1074,24 +942,24 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (247.23314pt too wide) in paragraph at lines 157--159
-[]\OT1/cmr/bx/n/12 Attack De-ci-sion AI:  \OT1/cmr/m/n/12 exec$[]\OML/cmm/m/it/12 ummary:attack[]i\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 default\OT1/cmr/m/n/12 (0)%\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 Selectedoptimalattackactions[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofthetime:$ 
+Overfull \hbox (1006.50883pt too wide) in paragraph at lines 153--156
+[]\OT1/cmr/bx/n/12 Recon Pri-ori-ti-sa-tion AI:  \OT1/cmr/m/n/12 exec$[]\OML/cmm/m/it/12 ummary:recon[]i\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 default\OT1/cmr/m/n/12 (0)%\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 Correctlyprioritized[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofreconnaissancefindings:[][]\OT1/cmr/m/n/12 %\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 Selectedoptimalattackactions[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofthetime:$ 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 167--170
+Underfull \hbox (badness 10000) in paragraph at lines 164--167
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--176
+Underfull \hbox (badness 10000) in paragraph at lines 169--173
 
  []
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:177: Misplaced alignment tab character &.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:174: Misplaced alignment tab character &.
 <argument> Phase 2 — C2 Simulation &
                                        Dummy Actions (Controlled Emulation)
-l.177 ...n & Dummy Actions (Controlled Emulation)}
+l.174 ...n & Dummy Actions (Controlled Emulation)}
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1101,21 +969,21 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--180
+Underfull \hbox (badness 10000) in paragraph at lines 174--177
 
  []
 
-[3] [4] [5]
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:232: Missing $ inserted.
+[3] [4]
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:223: Missing $ inserted.
 <inserted text> 
                 $
-l.232     \item Operating System: {{ recon_
+l.223     \item Operating System: {{ recon_
                                            data.os_name }} {{ recon_data.os_...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:232: Extra }, or forgotten $.
-l.232 ...Operating System: {{ recon_data.os_name }
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:223: Extra }, or forgotten $.
+l.223 ...Operating System: {{ recon_data.os_name }
                                                   } {{ recon_data.os_version }}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1123,8 +991,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:232: Extra }, or forgotten $.
-l.232 ...perating System: {{ recon_data.os_name }}
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:223: Extra }, or forgotten $.
+l.223 ...perating System: {{ recon_data.os_name }}
                                                    {{ recon_data.os_version }}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1133,114 +1001,114 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: LaTeX Error: Command \item invalid in math mode.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:224: LaTeX Error: Command \item invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.233     \item
+l.224     \item
                 Architecture: {{ recon_data.architecture }}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:224: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.233     \item A
+l.224     \item A
                  rchitecture: {{ recon_data.architecture }}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:224: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.233     \item A
+l.224     \item A
                  rchitecture: {{ recon_data.architecture }}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:234: LaTeX Error: Command \item invalid in math mode.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:225: LaTeX Error: Command \item invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.234     \item
+l.225     \item
                 Patch Level / Updates: {% for patch in recon_data.patches %}...
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:234: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:225: Missing $ inserted.
 <inserted text> 
                 $
-l.234     \item P
+l.225     \item P
                  atch Level / Updates: {% for patch in recon_data.patches %}...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:225: Missing } inserted.
+<inserted text> 
+                }
+l.225     \item P
+                 atch Level / Updates: {% for patch in recon_data.patches %}...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (68.80998pt too wide) in paragraph at lines 223--225
+[]\OT1/cmr/m/n/12 Operating Sys-tem:  recon$[]\OML/cmm/m/it/12 ata:os[]ame[]Architecture \OT1/cmr/m/n/12 : [][][]$ 
+ []
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: Missing } inserted.
+<inserted text> 
+                }
+l.233     \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: Missing } inserted.
+<inserted text> 
+                }
+l.233     \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:233: Missing } inserted.
+<inserted text> 
+                }
+l.233     \end{itemize}
+                       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:234: Missing } inserted.
 <inserted text> 
                 }
-l.234     \item P
-                 atch Level / Updates: {% for patch in recon_data.patches %}...
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (68.80998pt too wide) in paragraph at lines 232--234
-[]\OT1/cmr/m/n/12 Operating Sys-tem:  recon$[]\OML/cmm/m/it/12 ata:os[]ame[]Architecture \OT1/cmr/m/n/12 : [][][]$ 
- []
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:242: Missing } inserted.
-<inserted text> 
-                }
-l.242     \end{itemize}
-                       
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:242: Missing } inserted.
-<inserted text> 
-                }
-l.242     \end{itemize}
-                       
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:242: Missing } inserted.
-<inserted text> 
-                }
-l.242     \end{itemize}
-                       
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:243: Missing } inserted.
-<inserted text> 
-                }
-l.243 \end{itemize}
+l.234 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1248,10 +1116,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:243: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:234: Missing } inserted.
 <inserted text> 
                 }
-l.243 \end{itemize}
+l.234 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1259,10 +1127,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:245: Missing } inserted.
 <inserted text> 
                 }
-l.254     \end{itemize}
+l.245     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1270,10 +1138,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:245: Missing } inserted.
 <inserted text> 
                 }
-l.254     \end{itemize}
+l.245     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1281,10 +1149,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:245: Missing } inserted.
 <inserted text> 
                 }
-l.254     \end{itemize}
+l.245     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1292,10 +1160,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:253: Missing } inserted.
 <inserted text> 
                 }
-l.262     \end{itemize}
+l.253     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1303,10 +1171,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:253: Missing } inserted.
 <inserted text> 
                 }
-l.262     \end{itemize}
+l.253     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1314,10 +1182,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:253: Missing } inserted.
 <inserted text> 
                 }
-l.262     \end{itemize}
+l.253     \end{itemize}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1325,16 +1193,16 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Missing $ inserted.
 <inserted text> 
                 $
-l.263 ...m Default Credentials Detected: {{ recon_
+l.254 ...m Default Credentials Detected: {{ recon_
                                                   data.default_creds | defau...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Extra }, or forgotten $.
-l.263 ...on_data.default_creds | default("None") }
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Extra }, or forgotten $.
+l.254 ...on_data.default_creds | default("None") }
                                                   }
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1342,8 +1210,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Extra }, or forgotten $.
-l.263 ...n_data.default_creds | default("None") }}
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:254: Extra }, or forgotten $.
+l.254 ...n_data.default_creds | default("None") }}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1352,45 +1220,45 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: LaTeX Error: Command \end{itemize} invalid in math mode.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: LaTeX Error: Command \end{itemize} invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: LaTeX Error: Something's wrong--perhaps a missing \item.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: Missing $ inserted.
 <inserted text> 
                 $
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1398,10 +1266,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: Missing } inserted.
 <inserted text> 
                 }
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1409,10 +1277,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:264: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:255: Missing } inserted.
 <inserted text> 
                 }
-l.264 \end{itemize}
+l.255 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1420,16 +1288,16 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:271: Missing $ inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Missing $ inserted.
 <inserted text> 
                 $
-l.271 ... VPN / DMZ / Segmentation Info: {{ recon_
+l.262 ... VPN / DMZ / Segmentation Info: {{ recon_
                                                   data.vpn_dmz | default("N/...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:271: Extra }, or forgotten $.
-l.271 ... {{ recon_data.vpn_dmz | default("N/A") }
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Extra }, or forgotten $.
+l.262 ... {{ recon_data.vpn_dmz | default("N/A") }
                                                   }
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1437,14 +1305,178 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:271: Extra }, or forgotten $.
-l.271 ...{{ recon_data.vpn_dmz | default("N/A") }}
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:262: Extra }, or forgotten $.
+l.262 ...{{ recon_data.vpn_dmz | default("N/A") }}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.263 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing $ inserted.
+<inserted text> 
+                $
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing } inserted.
+<inserted text> 
+                }
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing } inserted.
+<inserted text> 
+                }
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing } inserted.
+<inserted text> 
+                }
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing } inserted.
+<inserted text> 
+                }
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:263: Missing } inserted.
+<inserted text> 
+                }
+l.263 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:268: Missing $ inserted.
+<inserted text> 
+                $
+l.268 ...protocol }} — Service: {{ port.service_
+                                                  name }}{% if port.version ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:268: Extra }, or forgotten $.
+l.268 ...ol }} — Service: {{ port.service_name }
+                                                  }{% if port.version %} v{{...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:268: Extra }, or forgotten $.
+l.268 ...l }} — Service: {{ port.service_name }}
+                                                  {% if port.version %} v{{ ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:270: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.270     \item
+                None
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:270: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.270     \item N
+                 one
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:270: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.270     \item N
+                 one
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: LaTeX Error: Command \end{itemize} invalid in math mode.
@@ -1481,6 +1513,39 @@ l.272 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing } inserted.
+<inserted text> 
+                }
+l.272 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing } inserted.
+<inserted text> 
+                }
+l.272 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing } inserted.
+<inserted text> 
+                }
+l.272 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing $ inserted.
 <inserted text> 
@@ -1526,126 +1591,6 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing } inserted.
-<inserted text> 
-                }
-l.272 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:272: Missing } inserted.
-<inserted text> 
-                }
-l.272 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:277: Missing $ inserted.
-<inserted text> 
-                $
-l.277 ...protocol }} — Service: {{ port.service_
-                                                  name }}{% if port.version ...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:277: Extra }, or forgotten $.
-l.277 ...ol }} — Service: {{ port.service_name }
-                                                  }{% if port.version %} v{{...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:277: Extra }, or forgotten $.
-l.277 ...l }} — Service: {{ port.service_name }}
-                                                  {% if port.version %} v{{ ...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:279: LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.279     \item
-                None
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:279: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.279     \item N
-                 one
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:279: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.279     \item N
-                 one
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: LaTeX Error: Command \end{itemize} invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.281 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.281 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.281 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: Missing } inserted.
 <inserted text> 
                 }
@@ -1679,50 +1624,7 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: Missing $ inserted.
-<inserted text> 
-                $
-l.281 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: Missing } inserted.
-<inserted text> 
-                }
-l.281 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: Missing } inserted.
-<inserted text> 
-                }
-l.281 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:281: Missing } inserted.
-<inserted text> 
-                }
-l.281 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
+[5]
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:290: Missing } inserted.
 <inserted text> 
                 }
@@ -1749,6 +1651,72 @@ my insertion and my current dilemma will both disappear.
 <inserted text> 
                 }
 l.290 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
+<inserted text> 
+                }
+l.299 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
+<inserted text> 
+                }
+l.299 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
+<inserted text> 
+                }
+l.299 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
+<inserted text> 
+                }
+l.308 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
+<inserted text> 
+                }
+l.308 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
+<inserted text> 
+                }
+l.308 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1757,158 +1725,134 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 [6]
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
-<inserted text> 
-                }
-l.299 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
-<inserted text> 
-                }
-l.299 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:299: Missing } inserted.
-<inserted text> 
-                }
-l.299 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
-<inserted text> 
-                }
-l.308 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
-<inserted text> 
-                }
-l.308 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:308: Missing } inserted.
-<inserted text> 
-                }
-l.308 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:317: Missing } inserted.
-<inserted text> 
-                }
-l.317 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:317: Missing } inserted.
-<inserted text> 
-                }
-l.317 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:317: Missing } inserted.
-<inserted text> 
-                }
-l.317 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-[7]
-Underfull \hbox (badness 2556) in paragraph at lines 329--330
+Underfull \hbox (badness 2556) in paragraph at lines 320--321
 []|\OT1/cmr/bx/n/12 Potential Im-
  []
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:332: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:323: Missing } inserted.
 <inserted text> 
                 }
-l.332 {{ f.name | default("N/A") }} &
+l.323 {{ f.name | default("N/A") }} &
                                       {{ f.evidence | default("N/A") }} & {{...
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--332
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
 []| \OT1/cmr/m/n/12 f.name | de-
  []
 
 
-Underfull \hbox (badness 4366) in paragraph at lines 332--332
+Underfull \hbox (badness 4366) in paragraph at lines 323--323
 []| \OT1/cmr/m/n/12 f.severity
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--332
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
 \OT1/cmr/m/n/12 | de-
  []
 
 
-Overfull \hbox (29.90887pt too wide) in paragraph at lines 332--332
+Overfull \hbox (29.90887pt too wide) in paragraph at lines 323--323
 \OT1/cmr/m/n/12 fault("Medium")| 
  []
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:335: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:326: Missing } inserted.
 <inserted text> 
                 }
-l.335 \end{longtable}
+l.326 \end{longtable}
                      
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
 
 
-Overfull \hbox (23.82338pt too wide) in alignment at lines 327--335
+Overfull \hbox (23.82338pt too wide) in alignment at lines 318--326
  [] [] [] [] 
  []
 
+[7]
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:347: Missing } inserted.
+<inserted text> 
+                }
+l.347 {{ a.name | default("N/A") }} &
+                                      {{ a.description | default("N/A") }} &...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:347: Missing } inserted.
+<inserted text> 
+                }
+l.347 {{ a.name | default("N/A") }} &
+                                      {{ a.description | default("N/A") }} &...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 345--347
+[]| \OT1/cmr/m/n/12 a.name | de-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--347
+\OT1/cmr/m/n/12 | de-
+ []
+
+
+Overfull \hbox (11.30074pt too wide) in paragraph at lines 347--347
+\OT1/cmr/m/n/12 fault("N/A")| 
+ []
+
+
+Underfull \hbox (badness 2020) in paragraph at lines 347--348
+[]| \OT1/cmr/m/n/12 a.priority
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
+\OT1/cmr/m/n/12 | de-
+ []
+
+
+Overfull \hbox (11.30074pt too wide) in paragraph at lines 347--348
+\OT1/cmr/m/n/12 fault("N/A")| 
+ []
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:351: Missing } inserted.
+<inserted text> 
+                }
+l.351 No actions executed &
+                            N/A & N/A & N/A \\
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:351: Missing } inserted.
+<inserted text> 
+                }
+l.351 No actions executed &
+                            N/A & N/A & N/A \\
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:354: Missing } inserted.
+<inserted text> 
+                }
+l.354 \end{longtable}
+                     
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
 [8]
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:355: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
 <inserted text> 
                 }
-l.355 \end{itemize}
+l.382 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1916,10 +1860,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:355: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
 <inserted text> 
                 }
-l.355 \end{itemize}
+l.382 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1927,10 +1871,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:355: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
 <inserted text> 
                 }
-l.355 \end{itemize}
+l.382 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1938,10 +1882,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:355: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
 <inserted text> 
                 }
-l.355 \end{itemize}
+l.382 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1949,10 +1893,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:355: Missing } inserted.
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
 <inserted text> 
                 }
-l.355 \end{itemize}
+l.382 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1960,1372 +1904,29 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:366: Missing } inserted.
-<inserted text> 
-                }
-l.366 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:371: Missing $ inserted.
-<inserted text> 
-                $
-l.371         \item {{ evasion.vm_
-                                  detection }}
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:371: Extra }, or forgotten $.
-l.371         \item {{ evasion.vm_detection }
-                                             }
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:371: Extra }, or forgotten $.
-l.371         \item {{ evasion.vm_detection }}
-                                              
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:373: LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.373         \item
-                    No VM/sandbox detection heuristics observed
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:373: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.373         \item N
-                     o VM/sandbox detection heuristics observed
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:373: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.373         \item N
-                     o VM/sandbox detection heuristics observed
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: LaTeX Error: Command \end{itemize} invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.375 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.375 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.375 \end{itemize}
-                   
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing } inserted.
-<inserted text> 
-                }
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing } inserted.
-<inserted text> 
-                }
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing $ inserted.
-<inserted text> 
-                $
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing } inserted.
-<inserted text> 
-                }
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing } inserted.
-<inserted text> 
-                }
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:375: Missing } inserted.
-<inserted text> 
-                }
-l.375 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:386: Missing } inserted.
-<inserted text> 
-                }
-l.386 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:386: Missing } inserted.
-<inserted text> 
-                }
-l.386 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:386: Missing } inserted.
-<inserted text> 
-                }
-l.386 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:386: Missing } inserted.
-<inserted text> 
-                }
-l.386 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:386: Missing } inserted.
-<inserted text> 
-                }
-l.386 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:390: Missing $ inserted.
-<inserted text> 
-                $
-l.390 ...asion.overall_success | default(0) }}\% }
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:390: Extra }, or forgotten $.
-<argument> ...asion.overall_success | default(0) }
-                                                  }\% 
-l.390 ...asion.overall_success | default(0) }}\% }
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:390: Extra }, or forgotten $.
-<argument> ...sion.overall_success | default(0) }}
-                                                  \% 
-l.390 ...asion.overall_success | default(0) }}\% }
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:390: Extra }, or forgotten $.
-<recently read> \egroup 
-                        
-l.390 ...asion.overall_success | default(0) }}\% }
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:392: Missing $ inserted.
-<inserted text> 
-                $
-l.392 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (308.34192pt too wide) in paragraph at lines 389--392
-\OT1/cmr/m/n/12 Overall Suc-cess Rate:   \OT1/cmr/bx/n/12 evasion.overall$[]\OML/cmm/m/it/12 uccess\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 default\OT1/cmr/m/n/12 (0)%(\OML/cmm/m/it/12 Thepayloadavoideddetectionin[]\OT1/cmr/m/n/12 %\OML/cmm/m/it/12 ofrecordedchecks:\OT1/cmr/m/n/12 )$ 
- []
-
-
-Underfull \hbox (badness 6396) in paragraph at lines 397--398
-[]|\OT1/cmr/bx/n/12 Success Rate
- []
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:401: Missing } inserted.
-<inserted text> 
-                }
-l.401 {{ d.defense | default("Unknown") }} &
-                                             {{ d.success_rate | default(0) ...
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:401: Missing } inserted.
-<inserted text> 
-                }
-l.401 {{ d.defense | default("Unknown") }} &
-                                             {{ d.success_rate | default(0) ...
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 399--401
-[]| \OT1/cmr/bx/n/12 d.defense | de-
- []
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:401: Missing $ inserted.
-<inserted text> 
-                $
-l.401 ...e | default("Unknown") }} & {{ d.success_
-                                                  rate | default(0) }} \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:401: Extra }, or forgotten $.
-l.401 ...n") }} & {{ d.success_rate | default(0) }
-                                                  } \\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:401: Extra }, or forgotten $.
-l.401 ...") }} & {{ d.success_rate | default(0) }}
-                                                   \\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Extra }, or forgotten $.
-<inserted text> }
-                 
-l.402 \hline
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402: Missing } inserted.
-<inserted text> 
-                }
-l.402 \hline
-            
-(That makes 100 errors; please try again.) 
+[9] [10] (./report_template.aux)
+
+Package rerunfilecheck Warning: File `report_template.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report_template.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+ ) 
 Here is how much of TeX's memory you used:
- 9898 strings out of 480171
- 153985 string characters out of 5894490
- 459239 words of memory out of 5000000
- 27729 multiletter control sequences out of 15000+600000
- 475379 words of font info for 48 fonts, out of 8000000 for 9000
+ 9905 strings out of 480171
+ 154063 string characters out of 5894490
+ 460239 words of memory out of 5000000
+ 27730 multiletter control sequences out of 15000+600000
+ 475548 words of font info for 49 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 60i,12n,63p,344b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,63p,362b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/prasdud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on report_template.pdf (11 pages, 111337 bytes).
+PDF statistics:
+ 109 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:402:  ==> Fatal error occurred, no output PDF file produced!

@@ -112,7 +112,7 @@
 
 \textbf{Purpose of Simulation:} \\
 This simulation assessed the security posture of the target system and tested its defenses against a controlled AI-driven malware attack. 
-The goal was to evaluate how the system responds to various automated offensive techniques, including evasion, reconnaissance, and attack decision-making.
+The goal was to evaluate how the system responds to various automated offensive techniques -- reconnaissance, and attack decision-making.
 
 \vspace{0.3cm}
 \textbf{Key Findings:} \\
@@ -135,8 +135,6 @@ The goal was to evaluate how the system responds to various automated offensive 
         {% endfor %}
     \end{itemize}
     
-    \item \textbf{Evasion Success Rate:} {{ exec_summary.evasion_success | default(0) }}\%
-    
     \item \textbf{Active AV / EDR Detected:} 
     \begin{itemize}
         {% for av in exec_summary.av_list %}
@@ -152,7 +150,6 @@ The goal was to evaluate how the system responds to various automated offensive 
 \vspace{0.3cm}
 \textbf{AI Model Performance:} \\
 \begin{itemize}
-    \item \textbf{Evasion AI:} {{ exec_summary.evasion_ai | default(0) }}\% — Successfully evaded detection for {{ exec_summary.evasion_ai | default(0) }}\% of actions.
     \item \textbf{Recon Prioritisation AI:} {{ exec_summary.recon_ai | default(0) }}\% — Correctly prioritized {{ exec_summary.recon_ai | default(0) }}\% of reconnaissance findings.
     \item \textbf{Attack Decision AI:} {{ exec_summary.attack_ai | default(0) }}\% — Selected optimal attack actions {{ exec_summary.attack_ai | default(0) }}\% of the time.
 \end{itemize}
@@ -176,30 +173,24 @@ Deliverables: structured recon dataset, open port list, environment snapshot, an
 
 \textbf{Phase 2 — C2 Simulation & Dummy Actions (Controlled Emulation)} \\
 Objective: emulate attacker post‑compromise behaviour at a high level — command-and-control interaction, staged dummy actions, and controlled data movement — while avoiding any real malicious payloads or persistence mechanisms.  
-Scope: simulated C2 exchanges and benign stand‑in payloads that exercise detection logic and telemetry generation only. Actions are designed to provoke detection and measure evasion, not to exploit vulnerabilities. \\
+Scope: simulated C2 exchanges and benign stand‑in payloads that exercise detection logic and telemetry generation only. \\
 
 \textbf{Phase 3 — Reporting \& Analysis} \\
 Objective: consolidate data from prior phases into an evidence-backed report, quantify model performance, and provide mitigations and recommendations.  
-Deliverables: structured findings, charts (e.g., evasion success), per‑module analysis, and an executive summary suitable for stakeholders.
+Deliverables: structured findings, charts, per‑module analysis, and an executive summary suitable for stakeholders.
 
 \subsection*{AI Models and Roles}
-\textbf{Evasion AI (Payload-side, Learns Detector Signals)} \\
-Role: adapt simulated offensive behaviour to reduce detection signals observed in the sandboxed environment. The model optimizes for increased “stealth” as measured by telemetry/sensor responses and detection flags.  
-Outputs: an evasion score, action-level success rates, and a ranked list of actions that consistently avoid detection.  
-Notes: this model operates solely against simulated detectors and logged telemetry; it does not create or deliver real-world exploits.
-
 \textbf{Recon Prioritisation AI (Server-side, Post-processing)} \\
 Role: ingest raw reconnaissance artifacts (service lists, file discovery, logs) and rank findings by operational relevance and risk. It helps the analyst focus on high‑value assets and probable attack vectors.  
 Outputs: prioritized recon list, confidence scores, and suggested follow-ups.
 
 \textbf{Attack Decision AI (Server-side, Planner)} \\
-Role: select the next benign/simulated action based on recon priorities, evasion feedback, and mission objectives. It balances likelihood of success, detection risk, and mission value to recommend the best next simulated step.  
+Role: select the next benign/simulated action based on recon priorities and mission objectives. It balances likelihood of success, detection risk, and mission value to recommend the best next simulated step.  
 Outputs: ordered action plans and rationale metadata (e.g., why an action was chosen).
 
 \subsection*{Data, Metrics \& Evaluation}
 Key metrics captured during simulations include:
 \begin{itemize}
-    \item \textbf{Evasion Success Rate:} percentage of simulated actions that did not trigger detection flags.
     \item \textbf{Detection Events:} timestamped telemetry and alert counts for each simulated action.
     \item \textbf{Recon Prioritisation Accuracy:} analyst-validated relevance of top-N findings.
     \item \textbf{Decision Optimality:} proportion of selected actions that met mission objectives under risk constraints.
@@ -335,98 +326,6 @@ This section analyzes the data collected by the Red Team AI Malware Simulator, h
 \end{longtable}
 
 \newpage
-
-
-% Evasion Metrics
-\section*{Evasion Metrics}
-
-\textbf{Purpose:} This section measures the effectiveness of the Evasion AI in avoiding detection by simulated defenses. It is objective and metric-focused — no interpretation or recommendations are provided here.
-
-\vspace{0.3cm}
-\textbf{Detection mechanisms tested:}
-\begin{itemize}
-    {% if evasion.detection_mechanisms %}
-        {% for mech in evasion.detection_mechanisms %}
-            \item {{ mech }}
-        {% endfor %}
-    {% else %}
-        \item N/A
-    {% endif %}
-\end{itemize}
-
-\textbf{AV / EDR presence (detected on system):}
-\begin{itemize}
-    {% if evasion.av_edr %}
-        {% for av in evasion.av_edr %}
-            \item {{ av.name }}{% if av.version %} — v{{ av.version }}{% endif %}{% if av.notes %} ({{ av.notes }}){% endif %}
-        {% endfor %}
-    {% else %}
-        \item None detected
-    {% endif %}
-\end{itemize}
-
-\textbf{VM / Sandbox detection indicators:}
-\begin{itemize}
-    {% if evasion.vm_detection %}
-        \item {{ evasion.vm_detection }}
-    {% else %}
-        \item No VM/sandbox detection heuristics observed
-    {% endif %}
-\end{itemize}
-
-\textbf{Monitoring / Logging mechanisms observed:}
-\begin{itemize}
-    {% if evasion.monitoring %}
-        {% for m in evasion.monitoring %}
-            \item {{ m }}
-        {% endfor %}
-    {% else %}
-        \item None / N/A
-    {% endif %}
-\end{itemize}
-
-\vspace{0.3cm}
-\textbf{Evasion success summary:} \\
-Overall Success Rate: \textbf{ {{ evasion.overall_success | default(0) }}\% }  
-(The payload avoided detection in {{ evasion.overall_success | default(0) }}\% of recorded checks.)
-
-\vspace{0.3cm}
-\textbf{Success by defense type:}
-\begin{longtable}{|p{6.5cm}|p{3cm}|}
-\hline
-\textbf{Defense Type} & \textbf{Success Rate (\%)} \\
-\hline
-{% if evasion.per_defense %}
-    {% for d in evasion.per_defense %}
-{{ d.defense | default("Unknown") }} & {{ d.success_rate | default(0) }} \\
-\hline
-    {% endfor %}
-{% else %}
-    No per-defense breakdown available & N/A \\
-\hline
-{% endif %}
-\end{longtable}
-
-\vspace{0.3cm}
-{% if charts.evasion_chart %}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\linewidth]{ {{ charts.evasion_chart }} }
-\caption{Evasion success distribution by category}
-\end{figure}
-{% endif %}
-
-\vspace{0.3cm}
-\textbf{Actions skipped or delayed by Evasion AI:} \\
-\begin{itemize}
-    {% if evasion.skipped %}
-        {% for action in evasion.skipped %}
-            \item {{ action }}
-        {% endfor %}
-    {% else %}
-        \item None
-    {% endif %}
-\end{itemize}
 
 \newpage
 
