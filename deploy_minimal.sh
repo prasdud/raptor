@@ -16,7 +16,7 @@ read -p "Enter your VPS IP or domain: " VPS_ADDRESS
 echo ""
 echo "Installing dependencies..."
 sudo apt update
-sudo apt install -y python3 python3-pip python3-venv nginx
+sudo apt install -y python3 python3-pip python3-venv nginx texlive-latex-base texlive-latex-extra
 
 echo ""
 echo "Setting up Python environment..."
@@ -91,7 +91,7 @@ Type=notify
 User=$USER
 Group=$USER
 WorkingDirectory=$(pwd)/src/c2
-Environment="PATH=$(pwd)/venv/bin"
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$(pwd)/venv/bin"
 ExecStart=$(pwd)/venv/bin/gunicorn --bind 0.0.0.0:8000 --workers 3 c2.wsgi:application
 Restart=on-failure
 

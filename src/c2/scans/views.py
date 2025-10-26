@@ -68,7 +68,7 @@ def submit_scan(request):
                 "message": "Scan received and pipeline started",
                 "session_id": str(session.session_id),
                 "note": "Pipeline is running in background. Check session status for progress."
-            })
+            }, status=201)
             
         except Exception as e:
             print(f"❌ Error in submit_scan: {e}")
