@@ -37,6 +37,15 @@ import os
 with open('c2/settings.py', 'r') as f:
     content = f.read()
 
+# Ensure 'import os' is at the top if not present
+if 'import os' not in content:
+    # Add after 'from pathlib import Path'
+    content = re.sub(
+        r"(from pathlib import Path)",
+        r"\1\nimport os",
+        content
+    )
+
 # Update ALLOWED_HOSTS
 content = re.sub(
     r"ALLOWED_HOSTS = \[.*?\]",
