@@ -94,9 +94,9 @@ postgres_admin: Postgr3sAdm1n#2024
 mongodb_user: M0ng0DB_P@ss123
 
 # API Keys
-AWS_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
-AWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-STRIPE_API_KEY=sk_live_51234567890abcdefghijklmnopqrstuvwxyz
+AWS_ACCESS_KEY=XXXXXXXXXXX
+AWS_SECRET_KEY=XXXXXXXXXXX
+STRIPE_API_KEY=XXXXXXXXXXX
 
 # Admin Credentials
 admin_user: administrator
@@ -128,21 +128,21 @@ Write-Host "[+] Created $credentialsDir\database_credentials.txt" -ForegroundCol
 @"
 {
   "stripe": {
-    "public_key": "pk_live_1234567890abcdefghijklmnop",
-    "secret_key": "sk_live_0987654321zyxwvutsrqponmlk"
+    "public_key": "XXXXXXXXXXX",
+    "secret_key": "XXXXXXXXXXX"
   },
   "aws": {
-    "access_key_id": "AKIAIOSFODNN7EXAMPLE",
-    "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    "access_key_id": "XXXXXXXXXXX",
+    "secret_access_key": "XXXXXXXXXXX",
     "region": "us-east-1"
   },
   "github": {
-    "token": "ghp_1234567890abcdefghijklmnopqrstuvwxyz",
+    "token": "XXXXXXXXXXX",
     "username": "admin"
   },
   "slack": {
-    "webhook_url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXX",
-    "bot_token": "xoxb-1234567890-1234567890-abcdefghijklmnopqrstuvwx"
+    "webhook_url": "XXXXXXXXXXX",
+    "bot_token": "XXXXXXXXXXX"
   }
 }
 "@ | Out-File -FilePath "$sensitiveDir\api_keys.json" -Encoding ASCII
@@ -162,8 +162,8 @@ Write-Host "[+] Created $sshDir\id_rsa (SSH private key)" -ForegroundColor Green
 # config files with credentials
 @"
 [default]
-aws_access_key_id = AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+aws_access_key_id = XXXXXXXXXXX
+aws_secret_access_key = XXXXXXXXXXX
 region = us-east-1
 "@ | Out-File -FilePath "$env:USERPROFILE\.aws\credentials" -Encoding ASCII -Force
 Write-Host "[+] Created AWS credentials file" -ForegroundColor Green
@@ -176,9 +176,9 @@ DB_USER=root
 DB_PASSWORD=MyS3cr3tP@ssw0rd!
 DB_NAME=production
 
-JWT_SECRET=super_secret_jwt_key_do_not_share_2024
-API_KEY=sk_live_1234567890abcdefghijklmnopqrstuvwxyz
-STRIPE_SECRET=sk_live_0987654321zyxwvutsrqponmlk
+JWT_SECRET=XXXXXXXXXXX
+API_KEY=XXXXXXXXXXX
+STRIPE_SECRET=XXXXXXXXXXX
 
 ADMIN_EMAIL=admin@company.com
 ADMIN_PASSWORD=@dm1nP@ss2024!
