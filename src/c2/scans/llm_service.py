@@ -80,62 +80,129 @@ Your role is to analyze penetration test results and provide actionable, priorit
         # Recon summary
         recon = master_json.get('recon_data', {})
         os_info = f"{recon.get('os_name', 'Unknown')} {recon.get('os_version', '')}"
+        architecture = recon.get('architecture', 'Unknown')
+        hostname = recon.get('hostname', 'Unknown')
+        current_user = recon.get('current_user', 'Unknown')
         is_admin = recon.get('is_admin', False)
+        
+        # Network information
         open_ports = recon.get('open_ports', [])
+        port_details = [f"Port {p.get('number', 'N/A')}/{p.get('protocol', 'tcp')}" for p in open_ports[:20]]
+        network_ips = recon.get('network_ips', [])
+        subnets = recon.get('subnets', [])
+        firewall_info = recon.get('firewall', {})
+        firewall_status = f"{firewall_info.get('name', 'Unknown')} ({'Enabled' if firewall_info.get('enabled') else 'Disabled'})"
+        
+        # User information
+        privileged_users = recon.get('privileged_accounts', [])
+        active_users = recon.get('active_users', [])
+        
+        # Software and processes
+        installed_software = recon.get('installed_software', [])
+        software_summary = "\n".join([f"  - {sw}" for sw in installed_software[:15]])
+        processes_count = len(recon.get('processes', []))
+        
+        # Antivirus
+        av_list = recon.get('active_av', [])
+        av_summary = ", ".join([av.get('name', 'Unknown') for av in av_list]) if av_list else "None detected"
         
         # Findings
         findings = master_json.get('findings', [])
         findings_summary = "\n".join([
-            f"- [{f.get('severity', 'Unknown')}] {f.get('name', 'Unknown')}: {f.get('evidence', '')}"
-            for f in findings[:10]  # Limit to top 10
+            f"  [{f.get('severity', 'Unknown')}] {f.get('name', 'Unknown')}\n    Evidence: {f.get('evidence', 'N/A')}\n    Impact: {f.get('impact', 'N/A')}"
+            for f in findings[:10]
         ])
         
         # Sensitive files
         sensitive_files = master_json.get('exec_summary', {}).get('sensitive_data_list', [])
-        sensitive_summary = "\n".join([f"- {f}" for f in sensitive_files[:10]])
+        sensitive_summary = "\n".join([f"  - {f}" for f in sensitive_files[:15]])
         
         # Attack recommendations
         attacks = master_json.get('attacks', [])
         attack_summary = "\n".join([
-            f"- {a.get('name', 'Unknown')}: {a.get('description', '')}"
+            f"  - {a.get('name', 'Unknown')} (Priority: {a.get('priority', 'N/A')})\n    {a.get('description', 'N/A')}"
             for a in attacks[:5]
         ])
         
-        # Build prompt
-        prompt = f"""Analyze the following penetration test results and provide specific, actionable security mitigations.
+        # Build comprehensive prompt
+        prompt = f"""You are a senior cybersecurity consultant analyzing a penetration test report. Provide SPECIFIC, ACTIONABLE mitigations based on the EXACT findings below.
 
-**Target System:** {target}
-**Risk Level:** {risk_level}
-**Operating System:** {os_info}
-**Administrative Access:** {"YES - Privileged access detected" if is_admin else "NO"}
-**Open Ports:** {len(open_ports)} ports detected - {', '.join(map(str, open_ports[:15]))}
+═══════════════════════════════════════════════════════════
+TARGET SYSTEM PROFILE
+═══════════════════════════════════════════════════════════
+Hostname: {hostname}
+Operating System: {os_info} ({architecture})
+Current User: {current_user} (Privileged: {"YES ⚠️" if is_admin else "NO"})
+Overall Risk: {risk_level}
 
-**Security Findings:**
+═══════════════════════════════════════════════════════════
+NETWORK & INFRASTRUCTURE
+═══════════════════════════════════════════════════════════
+Open Ports ({len(open_ports)} total):
+{chr(10).join(["  - " + p for p in port_details]) if port_details else "  - None"}
+
+IP Addresses: {', '.join(network_ips[:5]) if network_ips else 'N/A'}
+Subnets: {', '.join(subnets[:5]) if subnets else 'N/A'}
+Firewall: {firewall_status}
+
+═══════════════════════════════════════════════════════════
+USER ACCOUNTS & ACCESS CONTROL
+═══════════════════════════════════════════════════════════
+Privileged Accounts ({len(privileged_users)}):
+{chr(10).join(["  - " + str(u) for u in privileged_users[:10]]) if privileged_users else "  - None"}
+
+Active Users ({len(active_users)}):
+{chr(10).join(["  - " + str(u) for u in active_users[:10]]) if active_users else "  - None"}
+
+═══════════════════════════════════════════════════════════
+INSTALLED SOFTWARE & SECURITY
+═══════════════════════════════════════════════════════════
+Antivirus/EDR: {av_summary}
+Running Processes: {processes_count}
+
+Key Installed Software:
+{software_summary if software_summary else "  - N/A"}
+
+═══════════════════════════════════════════════════════════
+SECURITY FINDINGS (CRITICAL ISSUES)
+═══════════════════════════════════════════════════════════
 {findings_summary if findings_summary else "No major findings"}
 
-**Sensitive Files Identified:**
+═══════════════════════════════════════════════════════════
+SENSITIVE DATA EXPOSURE
+═══════════════════════════════════════════════════════════
 {sensitive_summary if sensitive_summary else "No sensitive files detected"}
 
-**AI-Recommended Attack Vectors:**
+═══════════════════════════════════════════════════════════
+AI-IDENTIFIED ATTACK VECTORS
+═══════════════════════════════════════════════════════════
 {attack_summary if attack_summary else "No attack vectors identified"}
 
-Based on this penetration test data, provide **8-12 prioritized security mitigations**. Format your response as a numbered list where each mitigation:
+═══════════════════════════════════════════════════════════
+MITIGATION REQUIREMENTS
+═══════════════════════════════════════════════════════════
 
-1. Addresses specific findings from the scan
-2. Includes concrete, implementable actions
-3. Prioritizes critical vulnerabilities first
-4. Considers the target's OS and environment
-5. Follows security best practices (CIS Controls, NIST, MITRE ATT&CK)
+Based on the SPECIFIC findings above, provide 8-12 TARGETED mitigations. Each mitigation MUST:
 
-Focus on:
-- Network hardening (firewall rules, port security)
-- Access control and privilege management
-- Data protection (encryption, DLP)
-- Detection and monitoring (EDR, SIEM, logging)
-- Vulnerability remediation
-- Security awareness and training
+1. Reference SPECIFIC findings (e.g., "Close port 3306" not "Close unnecessary ports")
+2. Include EXACT implementation steps (e.g., "Run: netsh advfirewall firewall add rule...")
+3. Prioritize by severity (Critical → High → Medium → Low)
+4. Address the ACTUAL OS/software found ({os_info})
+5. Consider the SPECIFIC ports, users, and software identified above
 
-Provide clear, concise recommendations suitable for both technical teams and management."""
+Format: Return ONLY a numbered list of mitigations. Each mitigation should be 1-2 sentences maximum.
+
+EXAMPLES OF GOOD MITIGATIONS:
+✓ "Disable MySQL service on port 3306 or restrict to localhost (127.0.0.1) via firewall rule"
+✓ "Implement file-level encryption for passwords.txt and api_keys.json found in C:\\SensitiveData"
+✓ "Remove administrative privileges from user '{current_user}' and enforce standard user accounts"
+
+EXAMPLES OF BAD MITIGATIONS:
+✗ "Implement security best practices" (too vague)
+✗ "Close unnecessary ports" (which ports?)
+✗ "Improve access controls" (how specifically?)
+
+Provide mitigations now:"""
 
         return prompt
     
