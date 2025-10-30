@@ -265,7 +265,7 @@ Limitations: results are representative for the test environment and detectors u
 \subsection*{Open Ports \& Services}
 \begin{itemize}
     {% for port in recon_data.open_ports %}
-    \item Port {{ port.number }} / {{ port.protocol }} — Service: {{ port.service_name }}{% if port.version %} v{{ port.version }}{% endif %}{% if port.vulns %} — Known CVEs: {{ port.vulns | join(', ') }}{% endif %}
+    \item Port {{ port.number }} / {{ port.protocol }}{% if port.service_name and port.service_name != "unknown" %} — Service: {{ port.service_name }}{% endif %}{% if port.version and port.version != "N/A" %} v{{ port.version }}{% endif %}{% if port.vulns %} — Known CVEs: {{ port.vulns | join(', ') }}{% endif %}
     {% else %}
     \item None
     {% endfor %}

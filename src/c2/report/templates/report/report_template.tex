@@ -108,7 +108,7 @@ Additional Techniques: {{ scope.techniques | default("Standard AI malware simula
     \item OS: {{ recon_data.os_name }} {{ recon_data.os_version }} ({{ recon_data.architecture }})
     \item Hostname: {{ recon_data.hostname }}
     \item Current User: {{ recon_data.current_user }} (Admin: {{ recon_data.is_admin }})
-    \item Open Ports: {% for p in recon_data.open_ports %}{{ p }}{% if not loop.last %}, {% endif %}{% endfor %}
+    \item Open Ports: {% for p in recon_data.open_ports %}{{ p.number }}{% if not loop.last %}, {% endif %}{% endfor %}
     \item Environment Variables: \\
     \begin{verbatim}
 {{ recon_data.env_vars | safe }}

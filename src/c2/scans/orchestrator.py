@@ -389,19 +389,52 @@ class PipelineOrchestrator:
                     {
                         "number": p, 
                         "protocol": "tcp", 
-                        "service_name": "unknown",
-                        "version": "N/A",
+                        "service_name": "",  # Remove "unknown" text
+                        "version": "",  # Remove "N/A" text
                         "vulns": []
                     } 
                     for p in recon_data.get('open_ports', [])
                 ],
                 "env_vars_count": len(recon_data.get('env_vars', {})),
-                "installed_software": recon_data.get('installed_software', []),
-                "processes": recon_data.get('processes', []),
+                # Format installed software as clean strings
+                "installed_software": [
+                    f"{sw.get('name', 'Unknown')} (v{sw.get('version', 'Unknown')})" 
+                    if isinstance(sw, dict) 
+                    else str(sw)
+                    for sw in recon_data.get('installed_software', [])
+                ],
+                # Format processes with clean output
+                "processes": [
+                    {
+                        "name": proc.get('name', 'Unknown') if isinstance(proc, dict) else str(proc),
+                        "pid": proc.get('pid', 0) if isinstance(proc, dict) else 0,
+                        "user": proc.get('username', 'N/A') if isinstance(proc, dict) else 'N/A'
+                    }
+                    for proc in recon_data.get('processes', [])
+                ],
                 "network_info": recon_data.get('network_info', {}),
+                "network_ips": recon_data.get('network_info', {}).get('ip_addresses', []),
+                "subnets": recon_data.get('network_info', {}).get('subnets', []),
+                "firewalls": [recon_data.get('firewall', {}).get('name', 'None')] if recon_data.get('firewall', {}).get('detected') else [],
                 "firewall": recon_data.get('firewall', {}),
+                # Format privileged users as clean strings
+                "privileged_accounts": recon_data.get('privileged_users', []),
                 "privileged_users": recon_data.get('privileged_users', []),
-                "active_users": recon_data.get('active_users', []),
+                # Format active users properly
+                "active_users": [
+                    f"{u.get('name', 'Unknown')}, terminal: {u.get('terminal', 'None')}, host: {u.get('host', 'None')}, started: {u.get('started', 'Unknown')}"
+                    if isinstance(u, dict)
+                    else str(u)
+                    for u in recon_data.get('active_users', [])
+                ],
+                # Format antivirus as clean list
+                "active_av": [
+                    {
+                        "name": av.get('name', 'Unknown') if isinstance(av, dict) else str(av),
+                        "version": av.get('version', 'Unknown') if isinstance(av, dict) and 'version' in av else None
+                    }
+                    for av in recon_data.get('antivirus', [])
+                ] if recon_data.get('antivirus') else [],
                 "antivirus": recon_data.get('antivirus', []),
                 "network_connections": recon_data.get('network_connections', [])
             },
