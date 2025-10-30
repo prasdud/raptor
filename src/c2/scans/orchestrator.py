@@ -330,11 +330,30 @@ class PipelineOrchestrator:
                     if f.get('sensitivity') == 'High'
                 ][:10],
                 "evasion_success": 85,  # Placeholder for evasion AI
-                "av_list": ["Windows Defender (signature-based)"] if 'Windows' in recon_data.get('os_name', '') else ["ClamAV"],
+                "av_list": [av.get('name', 'Unknown') if isinstance(av, dict) else str(av) 
+                          for av in recon_data.get('antivirus', [])] or 
+                         (["Windows Defender (signature-based)"] if 'Windows' in recon_data.get('os_name', '') else ["ClamAV"]),
                 "overall_risk": self._calculate_risk_level(recon_data, sensitive_files),
                 "evasion_ai": 85,
                 "recon_ai": int(sensitive_files.get('summary', {}).get('avg_sensitivity_score', 0.5) * 100),
-                "attack_ai": int(attack_plan.get('confidence', 0.5) * 100)
+                "attack_ai": int(attack_plan.get('confidence', 0.5) * 100),
+                "network_info": {
+                    "ip_addresses": recon_data.get('network_info', {}).get('ip_addresses', []),
+                    "subnets": recon_data.get('network_info', {}).get('subnets', []),
+                    "firewall": recon_data.get('firewall', {}).get('name', 'Unknown') + 
+                              (' (Enabled)' if recon_data.get('firewall', {}).get('enabled') else ' (Disabled)')
+                },
+                "users": {
+                    "privileged": recon_data.get('privileged_users', []),
+                    "active": [u.get('name', 'Unknown') if isinstance(u, dict) else str(u) 
+                             for u in recon_data.get('active_users', [])],
+                    "total": len(recon_data.get('user_accounts', {}).get('all_users', []))
+                },
+                "system_stats": {
+                    "processes": len(recon_data.get('processes', [])),
+                    "software_packages": len(recon_data.get('installed_software', [])),
+                    "network_connections": len(recon_data.get('network_connections', []))
+                }
             },
             
             "scope": {
@@ -377,8 +396,14 @@ class PipelineOrchestrator:
                     for p in recon_data.get('open_ports', [])
                 ],
                 "env_vars_count": len(recon_data.get('env_vars', {})),
-                "installed_software": [],
-                "processes": []
+                "installed_software": recon_data.get('installed_software', []),
+                "processes": recon_data.get('processes', []),
+                "network_info": recon_data.get('network_info', {}),
+                "firewall": recon_data.get('firewall', {}),
+                "privileged_users": recon_data.get('privileged_users', []),
+                "active_users": recon_data.get('active_users', []),
+                "antivirus": recon_data.get('antivirus', []),
+                "network_connections": recon_data.get('network_connections', [])
             },
             
             "findings": self._generate_findings(recon_data, sensitive_files),

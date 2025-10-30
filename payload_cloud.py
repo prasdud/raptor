@@ -193,6 +193,250 @@ def gather_system_info():
         return {'error': str(e)}
 
 
+def get_network_info():
+    """
+    Get network interface information (IP addresses, subnets)
+    
+    Returns:
+        Dictionary with network information
+    """
+    log("Gathering network information...")
+    network_info = {
+        'interfaces': [],
+        'ip_addresses': [],
+        'subnets': []
+    }
+    
+    try:
+        # Get network interfaces
+        if_addrs = psutil.net_if_addrs()
+        
+        for interface_name, addresses in if_addrs.items():
+            interface_info = {
+                'name': interface_name,
+                'addresses': []
+            }
+            
+            for addr in addresses:
+                addr_info = {
+                    'family': 'IPv4' if addr.family == socket.AF_INET else 'IPv6' if addr.family == socket.AF_INET6 else 'Other',
+                    'address': addr.address,
+                    'netmask': addr.netmask,
+                    'broadcast': addr.broadcast
+                }
+                interface_info['addresses'].append(addr_info)
+                
+                # Collect IP addresses and subnets
+                if addr.family == socket.AF_INET:
+                    network_info['ip_addresses'].append(addr.address)
+                    if addr.netmask:
+                        network_info['subnets'].append(f"{addr.address}/{addr.netmask}")
+            
+            network_info['interfaces'].append(interface_info)
+        
+        log(f"Found {len(network_info['interfaces'])} network interfaces")
+        return network_info
+        
+    except Exception as e:
+        log(f"Error gathering network info: {e}", "ERROR")
+        return network_info
+
+
+def get_firewall_status():
+    """
+    Detect firewall status (OS-specific)
+    
+    Returns:
+        Dictionary with firewall information
+    """
+    log("Detecting firewall status...")
+    firewall_info = {
+        'detected': False,
+        'name': None,
+        'enabled': None,
+        'rules_count': 0
+    }
+    
+    system = platform.system()
+    
+    try:
+        if system == "Windows":
+            # Check Windows Firewall
+            try:
+                result = subprocess.run(
+                    ["netsh", "advfirewall", "show", "allprofiles"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    firewall_info['detected'] = True
+                    firewall_info['name'] = 'Windows Defender Firewall'
+                    firewall_info['enabled'] = 'State                                 ON' in result.stdout
+            except:
+                pass
+                
+        elif system == "Linux":
+            # Check for iptables, ufw, firewalld
+            firewalls = [
+                ('ufw', ['ufw', 'status']),
+                ('iptables', ['iptables', '-L', '-n']),
+                ('firewalld', ['firewall-cmd', '--state'])
+            ]
+            
+            for fw_name, cmd in firewalls:
+                try:
+                    result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+                    if result.returncode == 0:
+                        firewall_info['detected'] = True
+                        firewall_info['name'] = fw_name
+                        firewall_info['enabled'] = 'active' in result.stdout.lower() or 'running' in result.stdout.lower()
+                        break
+                except (FileNotFoundError, subprocess.TimeoutExpired):
+                    continue
+        
+        elif system == "Darwin":  # macOS
+            try:
+                result = subprocess.run(
+                    ["pfctl", "-s", "info"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    firewall_info['detected'] = True
+                    firewall_info['name'] = 'pf (Packet Filter)'
+                    firewall_info['enabled'] = 'Enabled' in result.stdout
+            except:
+                pass
+        
+        log(f"Firewall: {firewall_info['name']} ({'enabled' if firewall_info['enabled'] else 'disabled'})")
+        return firewall_info
+        
+    except Exception as e:
+        log(f"Error detecting firewall: {e}", "ERROR")
+        return firewall_info
+
+
+def get_user_accounts():
+    """
+    Enumerate user accounts and identify privileged accounts
+    
+    Returns:
+        Dictionary with user account information
+    """
+    log("Enumerating user accounts...")
+    user_info = {
+        'current_user': None,
+        'all_users': [],
+        'privileged_users': [],
+        'active_users': []
+    }
+    
+    system = platform.system()
+    
+    try:
+        # Get current user
+        user_info['current_user'] = os.getlogin() if hasattr(os, 'getlogin') else os.environ.get('USER', 'unknown')
+        
+        if system == "Windows":
+            # Get all users
+            try:
+                result = subprocess.run(
+                    ["net", "user"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    lines = result.stdout.split('\n')
+                    for line in lines:
+                        # Parse user names from net user output
+                        users = line.split()
+                        for user in users:
+                            if user and not user.startswith('-') and user != 'User':
+                                user_info['all_users'].append(user)
+            except:
+                pass
+            
+            # Get administrators
+            try:
+                result = subprocess.run(
+                    ["net", "localgroup", "Administrators"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    lines = result.stdout.split('\n')
+                    capture = False
+                    for line in lines:
+                        if '-----' in line:
+                            capture = True
+                            continue
+                        if capture and line.strip() and 'command completed' not in line.lower():
+                            user_info['privileged_users'].append(line.strip())
+            except:
+                pass
+                
+        elif system == "Linux":
+            # Get all users from /etc/passwd
+            try:
+                with open('/etc/passwd', 'r') as f:
+                    for line in f:
+                        parts = line.split(':')
+                        if len(parts) >= 3:
+                            username = parts[0]
+                            uid = int(parts[2])
+                            # Filter out system accounts (UID < 1000)
+                            if uid >= 1000 or uid == 0:
+                                user_info['all_users'].append(username)
+                            # Root and sudo users are privileged
+                            if uid == 0:
+                                user_info['privileged_users'].append(username)
+            except:
+                pass
+            
+            # Get sudo group members
+            try:
+                result = subprocess.run(
+                    ["getent", "group", "sudo"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    parts = result.stdout.split(':')
+                    if len(parts) >= 4:
+                        sudo_users = parts[3].strip().split(',')
+                        user_info['privileged_users'].extend(sudo_users)
+            except:
+                pass
+        
+        # Get active/logged-in users
+        try:
+            for user in psutil.users():
+                user_info['active_users'].append({
+                    'name': user.name,
+                    'terminal': user.terminal,
+                    'host': user.host,
+                    'started': datetime.fromtimestamp(user.started).isoformat()
+                })
+        except:
+            pass
+        
+        # Remove duplicates
+        user_info['all_users'] = list(set(user_info['all_users']))
+        user_info['privileged_users'] = list(set(user_info['privileged_users']))
+        
+        log(f"Found {len(user_info['all_users'])} users ({len(user_info['privileged_users'])} privileged, {len(user_info['active_users'])} active)")
+        return user_info
+        
+    except Exception as e:
+        log(f"Error enumerating users: {e}", "ERROR")
+        return user_info
+
+
 def get_listening_ports():
     """
     Get all listening ports using psutil (more reliable than port scanning)
@@ -654,26 +898,47 @@ def main():
     # Step 3: Enumerate listening ports (using psutil)
     listening_ports = get_listening_ports()
     
-    # Step 4: Enumerate network connections
+    # Convert to simple port list for backward compatibility
+    open_ports = [p['port'] for p in listening_ports]
+    
+    # Step 4: Get network information
+    network_info = get_network_info()
+    
+    # Step 5: Get firewall status
+    firewall_info = get_firewall_status()
+    
+    # Step 6: Get user accounts
+    user_accounts = get_user_accounts()
+    
+    # Step 7: Enumerate network connections
     network_connections = get_network_connections()
     
-    # Step 5: Enumerate running processes
+    # Step 8: Enumerate running processes
     running_processes = get_running_processes()
     
-    # Step 6: Enumerate installed software
+    # Step 9: Enumerate installed software
     installed_software = get_installed_software()
     
-    # Step 7: Detect antivirus
+    # Step 10: Detect antivirus
     antivirus = detect_antivirus()
     
-    # Step 8: Build comprehensive payload
+    # Step 11: Build comprehensive payload
     payload = {
         'recon_data': {
             **system_info,
+            # Core fields (backward compatible)
             'files': files,
-            'listening_ports': listening_ports,
+            'open_ports': open_ports,  # Simple list for orchestrator
+            
+            # Enhanced reconnaissance data
+            'listening_ports': listening_ports,  # Detailed port info
+            'network_info': network_info,
+            'firewall': firewall_info,
+            'user_accounts': user_accounts,
+            'privileged_users': user_accounts['privileged_users'],
+            'active_users': user_accounts['active_users'],
             'network_connections': network_connections,
-            'running_processes': running_processes,
+            'processes': running_processes,
             'installed_software': installed_software,
             'antivirus': antivirus,
             'timestamp': datetime.now().isoformat(),
@@ -705,7 +970,11 @@ def main():
         log("FINAL RESULTS:")
         log(f"  Risk Level: {summary.get('overall_risk_level', 'unknown')}")
         log(f"  Sensitive Files: {summary.get('sensitive_files_found', 0)}")
-        log(f"  Listening Ports: {len(listening_ports)}")
+        log(f"  Open Ports: {len(open_ports)}")
+        log(f"  IP Addresses: {', '.join(network_info['ip_addresses'][:3])}")
+        log(f"  Privileged Users: {len(user_accounts['privileged_users'])}")
+        log(f"  Active Users: {len(user_accounts['active_users'])}")
+        log(f"  Firewall: {firewall_info['name']} ({'ON' if firewall_info['enabled'] else 'OFF'})")
         log(f"  Network Connections: {len(network_connections)}")
         log(f"  Running Processes: {len(running_processes)}")
         log(f"  Installed Software: {len(installed_software)}")
