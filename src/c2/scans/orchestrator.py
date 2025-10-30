@@ -8,6 +8,7 @@ import requests
 from datetime import datetime
 from django.utils import timezone
 from django.conf import settings
+from .llm_service import LLMMitigationService
 
 
 class PipelineOrchestrator:
@@ -64,6 +65,15 @@ class PipelineOrchestrator:
             print("📋 Step 5: Building master report JSON...")
             self._build_master_json(recon_data, sensitive_files, attack_plan)
             print(f"   ✓ Master JSON created ({len(json.dumps(self.master_data))} bytes)")
+            
+            # Step 5.5: Generate LLM-based mitigations
+            print("🤖 Step 5.5: Generating AI mitigations (LLM)...")
+            llm_mitigations = self._generate_llm_mitigations()
+            if llm_mitigations:
+                self.master_data['mitigations'] = llm_mitigations
+                print(f"   ✓ Generated {len(llm_mitigations)} AI-powered mitigations")
+            else:
+                print(f"   ⚠️  Using fallback mitigations")
             
             # Step 6: Generate report
             self.session.status = 'reporting'
@@ -499,6 +509,35 @@ class PipelineOrchestrator:
         mitigations.append("Conduct periodic vulnerability assessments and penetration tests")
         
         return mitigations
+    
+    def _generate_llm_mitigations(self):
+        """
+        Generate mitigations using Cohere LLM based on master_data
+        
+        Returns:
+            list: LLM-generated mitigations, or None if LLM unavailable
+        """
+        try:
+            # Initialize LLM service
+            llm_service = LLMMitigationService()
+            
+            # Generate mitigations from complete scan data
+            mitigations = llm_service.generate_mitigations(
+                master_json=self.master_data,
+                max_tokens=2000,
+                temperature=0.7  # Balanced creativity/consistency
+            )
+            
+            return mitigations
+            
+        except ValueError as e:
+            # API key not configured
+            print(f"   ⚠️  LLM service not configured: {e}")
+            return None
+        except Exception as e:
+            # Other errors (API failure, network, etc.)
+            print(f"   ⚠️  LLM mitigation generation failed: {e}")
+            return None
     
     def _generate_report(self):
         """
