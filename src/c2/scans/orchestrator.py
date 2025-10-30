@@ -71,9 +71,10 @@ class PipelineOrchestrator:
             llm_mitigations = self._generate_llm_mitigations()
             if llm_mitigations:
                 self.master_data['mitigations'] = llm_mitigations
-                print(f"   ✓ Generated {len(llm_mitigations)} AI-powered mitigations")
+                print(f"   ✓ Generated {len(llm_mitigations)} AI-powered mitigations from Cohere LLM")
+                print(f"   📝 Sample: {llm_mitigations[0][:80]}...")
             else:
-                print(f"   ⚠️  Using fallback mitigations")
+                print(f"   ⚠️  Using fallback mitigations (LLM unavailable)")
             
             # Step 6: Generate report
             self.session.status = 'reporting'
