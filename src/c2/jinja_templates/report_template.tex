@@ -339,20 +339,20 @@ This section analyzes the data collected by the Red Team AI Malware Simulator, h
 \textbf{Purpose:} This section summarizes the actions executed by the simulated malware, including their outcomes and prioritization. It provides an overview of what was attempted, what succeeded or failed, and how the AI prioritized each action.
 
 \vspace{0.3cm}
-\textbf{Actions Executed:} The table below lists all simulated attack actions performed by the Red Team AI Malware Simulator. Each action includes a description, the outcome, and its priority or importance score as determined by the Recon Prioritization AI.
+\textbf{Actions Executed:} The table below lists all simulated attack actions performed by the Red Team AI Malware Simulator. Each action includes a description and its priority score as determined by the Recon Prioritization AI.
 
-\begin{longtable}{|>{\RaggedRight}p{3cm}|>{\RaggedRight}p{5.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|}
+\begin{longtable}{|>{\RaggedRight}p{4cm}|>{\RaggedRight}p{8cm}|>{\centering\arraybackslash}p{2.5cm}|}
 \hline
-\textbf{Action Name} & \textbf{Description} & \textbf{Outcome} & \textbf{Priority Score} \\
+\textbf{Action Name} & \textbf{Description} & \textbf{Priority Score} \\
 \hline
 \endhead
 {% if attacks %}
     {% for a in attacks %}
-{{ a.name | default("N/A") }} & {{ a.description | default("N/A") }} & {{ a.outcome | default("N/A") }} & {{ a.priority | default("N/A") }} \\
+{{ a.name | default("N/A") }} & {{ a.description | default("N/A") }} & {{ a.priority | default("N/A") }} \\
 \hline
     {% endfor %}
 {% else %}
-No actions executed & N/A & N/A & N/A \\
+No actions executed & N/A & N/A \\
 \hline
 {% endif %}
 \end{longtable}
