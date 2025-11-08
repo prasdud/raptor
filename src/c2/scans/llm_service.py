@@ -218,6 +218,11 @@ Provide mitigations now:"""
         """
         mitigations = []
         
+        # Fix common character encoding issues
+        # Replace ASCII codes that appear as numbers (e.g., "39;" for single quote)
+        import re
+        response_text = re.sub(r'(\d+);', lambda m: chr(int(m.group(1))), response_text)
+        
         # Split by lines
         lines = response_text.strip().split('\n')
         
