@@ -6,6 +6,7 @@ import json
 import os
 import requests
 from datetime import datetime
+import pytz
 from django.utils import timezone
 from django.conf import settings
 from .llm_service import LLMMitigationService
@@ -315,11 +316,15 @@ class PipelineOrchestrator:
             sensitive_files: Output from file sensitivity AI
             attack_plan: Output from attack decision AI
         """
+        # Get current time in IST
+        ist_tz = pytz.timezone('Asia/Kolkata')
+        ist_now = timezone.now().astimezone(ist_tz)
+        
         self.master_data = {
             "target_name": recon_data.get('hostname', 'UNKNOWN'),
-            "generated_at": timezone.now().strftime('%Y-%m-%dT%H:%M:%SZ'),
-            "sim_start": self.session.start_time.strftime('%Y-%m-%d %H:%M'),
-            "sim_end": timezone.now().strftime('%Y-%m-%d %H:%M'),
+            "generated_at": ist_now.strftime('%Y-%m-%dT%H:%M:%S IST'),
+            "sim_start": self.session.start_time.astimezone(ist_tz).strftime('%Y-%m-%d %H:%M IST'),
+            "sim_end": ist_now.strftime('%Y-%m-%d %H:%M IST'),
             
             "exec_summary": {
                 "purpose": "AI-driven penetration test simulation for security assessment",
@@ -436,7 +441,8 @@ class PipelineOrchestrator:
                     for av in recon_data.get('antivirus', [])
                 ] if recon_data.get('antivirus') else [],
                 "antivirus": recon_data.get('antivirus', []),
-                "network_connections": recon_data.get('network_connections', [])
+                "network_connections": recon_data.get('network_connections', []),
+                "connected_devices": recon_data.get('connected_devices', [])
             },
             
             "findings": self._generate_findings(recon_data, sensitive_files),

