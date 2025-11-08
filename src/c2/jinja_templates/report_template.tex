@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{longtable}
+\usepackage{tabularx}
 \usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{xcolor}
@@ -10,6 +11,7 @@
 \usepackage{float}
 \usepackage{setspace}
 \usepackage{titling}
+\usepackage{ragged2e}
 
 % Colors
 \definecolor{coverred}{RGB}{139,0,0}
@@ -313,12 +315,13 @@ Limitations: results are representative for the test environment and detectors u
 % Findings & Analysis
 \section*{Findings \& Analysis}
 
-This section analyzes the data collected by the Red Team AI Malware Simulator, highlights critical issues, and provides context for the AI’s actions and attack outcomes. It focuses on risk assessment and patterns identified during the simulation.
+This section analyzes the data collected by the Red Team AI Malware Simulator, highlights critical issues, and provides context for the AI's actions and attack outcomes. It focuses on risk assessment and patterns identified during the simulation.
 
-\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{3cm}|}
+\begin{longtable}{|>{\RaggedRight}p{3.5cm}|>{\RaggedRight}p{7cm}|>{\centering\arraybackslash}p{2cm}|>{\RaggedRight\arraybackslash}p{3cm}|}
 \hline
 \textbf{Finding / Issue} & \textbf{Evidence / Data} & \textbf{Severity} & \textbf{Potential Impact if System Were Real} \\
 \hline
+\endhead
 {% for f in findings %}
 {{ f.name | default("N/A") }} & {{ f.evidence | default("N/A") }} & {{ f.severity | default("Medium") }} & {{ f.impact | default("N/A") }} \\
 \hline
@@ -338,10 +341,11 @@ This section analyzes the data collected by the Red Team AI Malware Simulator, h
 \vspace{0.3cm}
 \textbf{Actions Executed:} The table below lists all simulated attack actions performed by the Red Team AI Malware Simulator. Each action includes a description, the outcome, and its priority or importance score as determined by the Recon Prioritization AI.
 
-\begin{longtable}{|p{4cm}|p{6cm}|p{2cm}|p{2cm}|}
+\begin{longtable}{|>{\RaggedRight}p{3.5cm}|>{\RaggedRight}p{7cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|}
 \hline
-\textbf{Action Name} & \textbf{Description} & \textbf{Outcome} & \textbf{Priority / Score} \\
+\textbf{Action Name} & \textbf{Description} & \textbf{Outcome} & \textbf{Priority Score} \\
 \hline
+\endhead
 {% if attacks %}
     {% for a in attacks %}
 {{ a.name | default("N/A") }} & {{ a.description | default("N/A") }} & {{ a.outcome | default("N/A") }} & {{ a.priority | default("N/A") }} \\
@@ -372,12 +376,13 @@ No actions executed & N/A & N/A & N/A \\
 \vspace{0.3cm}
 \textbf{Recommended Mitigations:}
 \begin{itemize}
+\raggedright
 {% if mitigations %}
     {% for m in mitigations %}
-    \item {{ m }}
+    \item \parbox[t]{\dimexpr\linewidth-\leftmargin-\labelwidth-\labelsep\relax}{\raggedright {{ m }}}
     {% endfor %}
 {% else %}
-    No mitigation suggestions available.
+    \item No mitigation suggestions available.
 {% endif %}
 \end{itemize}
 
