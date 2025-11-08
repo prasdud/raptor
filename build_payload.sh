@@ -29,6 +29,7 @@ echo ""
 
 pyinstaller \
     --onefile \
+    --noconsole \
     --name raptor_payload \
     --clean \
     --distpath ./dist \
