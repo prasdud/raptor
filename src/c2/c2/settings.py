@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rge)hoc4mx)4gi&0r4u)!!kg@k98fi6wo^*0ym^i=v)v5(p9g7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # For testing - restrict in production!
 
 
 # Application definition
@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'scans',
     'report',
+    'reconpriority',
+    'attackdecision'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +137,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# AI/LLM Configuration
+import os
+COHERE_API_KEY = os.environ.get('COHERE_API_KEY', None)

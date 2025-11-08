@@ -80,14 +80,12 @@
 \begin{itemize}
     \item Open Ports / Services: {{ exec_summary.open_ports_summary | default("N/A") }}
     \item Sensitive Data: {{ exec_summary.sensitive_data | default("None") }}
-    \item Evasion Success Rate: {{ exec_summary.evasion_success | default(0) }}\%
     \item Active AV / EDR: {{ exec_summary.av_name | default("Unknown") }}
     \item Overall Risk Assessment: {{ exec_summary.overall_risk | default("Low") }}
 \end{itemize}
 
 \textbf{AI Model Performance:}
 \begin{itemize}
-    \item Evasion AI: {{ exec_summary.evasion_ai | default(0) }}\%
     \item Recon Prioritisation AI: {{ exec_summary.recon_ai | default(0) }}\%
     \item Attack Decision AI: {{ exec_summary.attack_ai | default(0) }}\%
 \end{itemize}
@@ -100,7 +98,7 @@
 Phase 1 - Recon \\
 Phase 2 - C2 and Dummy Actions \\
 Phase 3 - Reporting \\
-AI Models Used: Evasion AI, Recon Prioritization AI, Attack Decision AI \\
+AI Models Used: Recon Prioritization AI, Attack Decision AI \\
 Additional Techniques: {{ scope.techniques | default("Standard AI malware simulation techniques.") }}
 \newpage
 
@@ -110,7 +108,7 @@ Additional Techniques: {{ scope.techniques | default("Standard AI malware simula
     \item OS: {{ recon_data.os_name }} {{ recon_data.os_version }} ({{ recon_data.architecture }})
     \item Hostname: {{ recon_data.hostname }}
     \item Current User: {{ recon_data.current_user }} (Admin: {{ recon_data.is_admin }})
-    \item Open Ports: {% for p in recon_data.open_ports %}{{ p }}{% if not loop.last %}, {% endif %}{% endfor %}
+    \item Open Ports: {% for p in recon_data.open_ports %}{{ p.number }}{% if not loop.last %}, {% endif %}{% endfor %}
     \item Environment Variables: \\
     \begin{verbatim}
 {{ recon_data.env_vars | safe }}
@@ -129,25 +127,6 @@ Additional Techniques: {{ scope.techniques | default("Standard AI malware simula
 \hline
 {% endfor %}
 \end{longtable}
-\newpage
-
-% Evasion Metrics
-\section*{Evasion Metrics}
-Overall Success Rate: {{ evasion.overall_success | default(0) }}\% \\
-Actions Skipped or Delayed:
-\begin{itemize}
-{% for action in evasion.skipped %}
-    \item {{ action }}
-{% endfor %}
-\end{itemize}
-
-{% if charts.evasion_chart %}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\linewidth]{ {{ charts.evasion_chart }} }
-\caption{Evasion Success Chart}
-\end{figure}
-{% endif %}
 \newpage
 
 % Attack Simulation Summary

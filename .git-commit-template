@@ -1,0 +1,100 @@
+Add LLM-powered mitigations using Cohere API
+
+## Summary
+Integrated Cohere's LLM to generate intelligent, context-aware security
+mitigations instead of hardcoded recommendations. The system now analyzes
+complete penetration test results and produces tailored mitigation strategies
+specific to each scan's findings.
+
+## What Changed
+
+### New Features
+- LLM service module for Cohere API integration
+- Smart prompt engineering from scan data (findings, ports, files, attacks)
+- Response parsing and cleanup (strips markdown, formatting)
+- Graceful fallback to static mitigations if LLM unavailable
+- Pipeline step 5.5: AI mitigation generation
+
+### Files Added
+- src/c2/scans/llm_service.py (215 lines) - LLM integration logic
+- docs/LLM_MITIGATIONS.md (800 lines) - Full documentation
+- docs/LLM_QUICKSTART.md (350 lines) - Quick start guide
+- docs/LLM_ARCHITECTURE.md (450 lines) - Architecture diagrams
+- tests/test_llm_mitigations.py (200 lines) - Integration test
+- setup_llm.sh (70 lines) - Automated setup script
+- LLM_INTEGRATION_SUMMARY.md - Implementation summary
+
+### Files Modified
+- src/c2/scans/orchestrator.py (+35 lines) - Pipeline integration
+- src/c2/c2/settings.py (+3 lines) - API key configuration
+- requirements.txt (+1 line) - Added cohere==5.13.5
+
+### Backward Compatibility
+- 100% backward compatible
+- Works with or without COHERE_API_KEY
+- Falls back to static mitigations on error
+- No breaking changes to API or database
+
+## How It Works
+
+Pipeline flow:
+```
+Recon → AI Analysis → Attack Planning → Build JSON
+  → LLM Mitigations (NEW) → Generate Report
+```
+
+Before (static):
+```python
+mitigations = [
+  "Implement least privilege",
+  "Close unnecessary ports",
+  "Encrypt sensitive files"
+]
+```
+
+After (AI-powered):
+```python
+mitigations = [
+  "Restrict MySQL port 3306 to internal network using firewall rules",
+  "Enable authentication on Jenkins and implement RBAC",
+  "Rotate SSH keys in /home/admin/.ssh/ and use cert-based auth",
+  "Migrate credentials from database.yml to secrets manager (Vault)"
+]
+```
+
+## Setup
+
+```bash
+# Install Cohere SDK
+pip install cohere==5.13.5
+
+# Set API key (get from https://dashboard.cohere.com/)
+export COHERE_API_KEY="your-key-here"
+
+# Test
+python3 tests/test_llm_mitigations.py
+```
+
+## Cost
+- Free tier: 100 calls/month
+- Production: ~$0.001 per report (~$2-3/month for 1000 reports)
+
+## Testing
+- Unit test: tests/test_llm_mitigations.py
+- Integration test: tests/test_payload.py
+- Manual verification in generated PDF reports
+
+## Documentation
+See docs/LLM_QUICKSTART.md for setup instructions
+See docs/LLM_MITIGATIONS.md for full technical details
+See docs/LLM_ARCHITECTURE.md for architecture diagrams
+See LLM_INTEGRATION_SUMMARY.md for implementation summary
+
+## Security
+- API key stored in environment variables
+- HTTPS encryption to Cohere
+- No PII in prompts
+- Graceful error handling
+- Rate limiting (100/month free tier)
+
+Closes: N/A (enhancement)

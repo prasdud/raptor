@@ -3,7 +3,7 @@ import json
 import datetime
 import subprocess
 import tempfile
-import matplotlib.pyplot as plt
+import pytz
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -22,6 +22,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_chart(data_list, labels, out_path, chart_type='pie', title=None):
     """Generate bar or pie chart and save as PNG"""
+    # Lazy import matplotlib only when needed
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    
     plt.figure(figsize=(6,3))
     if chart_type == 'pie':
         plt.pie(data_list, labels=labels, autopct='%1.1f%%', colors=['#ff6b6b','#4b0082','#ffb347'])
@@ -45,10 +50,14 @@ def generate_report(request):
     except Exception as e:
         return JsonResponse({'error': 'Invalid JSON', 'detail': str(e)}, status=400)
 
+    # Get current time in IST
+    ist_tz = pytz.timezone('Asia/Kolkata')
+    ist_now = datetime.datetime.now(ist_tz)
+    
     # Prepare context
     context = {
         "target_name": payload.get('recon_data', {}).get('hostname', 'UNKNOWN'),
-        "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+        "generated_at": ist_now.strftime('%Y-%m-%d %H:%M IST'),
         "sim_start": payload.get('sim_start', 'TBD'),
         "sim_end": payload.get('sim_end', 'TBD'),
         "exec_summary": payload.get('exec_summary', {}),

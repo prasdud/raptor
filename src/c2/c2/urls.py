@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('scans.urls')),  # all scan endpoints under /api/
     path('reports/', include('report.urls')),  # all report endpoints under /reports/
+    path('reconpriority/', include('reconpriority.urls')),  # all reconpriority endpoints under /reconpriority/
+    path('api/attackdecision/', include('attackdecision.urls')),  # serve attackdecision at /api/attackdecision/
 ]
