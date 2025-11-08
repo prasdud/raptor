@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.3)  8 NOV 2025 11:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.3)  8 NOV 2025 11:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1653,15 +1653,11 @@ Overfull \hbox (38.04976pt too wide) in alignment at lines 324--329
  []
 
 [7]
-Overfull \hbox (38.04976pt too wide) in alignment at lines 344--348
- [] [] [] [] 
- []
-
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:351: Missing } inserted.
 <inserted text> 
                 }
 l.351 {{ a.name | default("N/A") }} &
-                                      {{ a.description | default("N/A") }} &...
+                                      {{ a.description | default("N/A") }} \\
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
@@ -1670,7 +1666,7 @@ Try to go on, since this might almost work.
 <inserted text> 
                 }
 l.351 {{ a.name | default("N/A") }} &
-                                      {{ a.description | default("N/A") }} &...
+                                      {{ a.description | default("N/A") }} \\
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
@@ -1679,7 +1675,7 @@ Try to go on, since this might almost work.
 <inserted text> 
                 }
 l.355 No actions executed &
-                            N/A & N/A & N/A \\
+                            N/A \\
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
@@ -1688,7 +1684,7 @@ Try to go on, since this might almost work.
 <inserted text> 
                 }
 l.355 No actions executed &
-                            N/A & N/A & N/A \\
+                            N/A \\
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
@@ -1702,12 +1698,67 @@ I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
 
-
-Overfull \hbox (38.04976pt too wide) in alignment at lines 348--358
- [] [] [] [] 
- []
-
 [8]
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing $ inserted.
+<inserted text> 
+                $
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Extra }, or forgotten $.
+<argument> ...e \raggedright {{ m | latex_escape }
+                                                  }\@@par 
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Extra }, or forgotten $.
+<argument> ... \raggedright {{ m | latex_escape }}
+                                                  \@@par 
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing $ inserted.
+<inserted text> 
+                $
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
+<inserted text> 
+                }
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:382: Missing } inserted.
+<inserted text> 
+                }
+l.382 ...lax}{\raggedright {{ m | latex_escape }}}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 /home/prasdud/playground/raptor/src/c2/jinja_templates/report_template.tex:387: Missing } inserted.
 <inserted text> 
                 }
@@ -1782,7 +1833,7 @@ Here is how much of TeX's memory you used:
  59 hyphenation exceptions out of 8191
  60i,11n,63p,413b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/prasdud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report_template.pdf (11 pages, 111306 bytes).
+Output written on report_template.pdf (11 pages, 111250 bytes).
 PDF statistics:
  109 PDF objects out of 1000 (max. 8388607)
  78 compressed objects within 1 object stream

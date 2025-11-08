@@ -379,7 +379,7 @@ No actions executed & N/A \\
 \raggedright
 {% if mitigations %}
     {% for m in mitigations %}
-    \item \parbox[t]{\dimexpr\linewidth-\leftmargin-\labelwidth-\labelsep\relax}{\raggedright {{ m }}}
+    \item \parbox[t]{\dimexpr\linewidth-\leftmargin-\labelwidth-\labelsep\relax}{\raggedright {{ m | latex_escape }}}
     {% endfor %}
 {% else %}
     \item No mitigation suggestions available.
