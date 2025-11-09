@@ -330,7 +330,7 @@ class PipelineOrchestrator:
                 "purpose": "AI-driven penetration test simulation for security assessment",
                 "open_ports_list": [f"{p} - Service detected" for p in recon_data.get('open_ports', [])[:10]],
                 "sensitive_data_list": [
-                    f"{f['path']}{f['filename']}" 
+                    f['path']  # path already contains full path including filename
                     for f in sensitive_files.get('files', []) 
                     if f.get('sensitivity') == 'High'
                 ][:10],

@@ -5,11 +5,15 @@ def latex_escape(text):
     """
     Escape special LaTeX characters in text.
     Handles quotes, underscores, and other special characters.
+    ORDER MATTERS: Backslash must be escaped first!
     """
     if not isinstance(text, str):
         return text
     
-    # Define LaTeX special characters and their replacements
+    # CRITICAL: Escape backslash FIRST, before adding any other backslashes
+    text = text.replace('\\', r'\textbackslash{}')
+    
+    # Now escape other special characters (order doesn't matter for these)
     replacements = {
         '&': r'\&',
         '%': r'\%',
@@ -20,7 +24,6 @@ def latex_escape(text):
         '}': r'\}',
         '~': r'\textasciitilde{}',
         '^': r'\^{}',
-        '\\': r'\textbackslash{}',
         '"': "''",  # Convert double quotes to LaTeX double quotes
         '"': "''",  # Closing smart quote
         '"': "''",  # Opening smart quote  
