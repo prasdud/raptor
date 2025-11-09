@@ -85,6 +85,9 @@ def get_target_directories():
             home / "Downloads",
             home / "AppData" / "Roaming",
             Path("C:/ProgramData"),
+            # Demo environment directories (Healthcare & Finance simulation)
+            Path("C:/Healthcare"),
+            Path("C:/Finance"),
         ]
     elif system == "Darwin":  # macOS
         directories = [
