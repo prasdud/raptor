@@ -131,7 +131,7 @@ The goal was to evaluate how the system responds to various automated offensive 
     \item \textbf{Sensitive Files or Data Identified:} 
     \begin{itemize}
         {% for f in exec_summary.sensitive_data_list %}
-            \item {{ f }}
+            \item \texttt{ {{ f }} }
         {% else %}
             \item None
         {% endfor %}
