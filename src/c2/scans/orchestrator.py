@@ -26,39 +26,6 @@ class PipelineOrchestrator:
         self.master_data = {}
         self.base_url = "http://localhost:8000"  # C2 server URL
     
-    def _escape_latex(self, text):
-        """
-        Escape special LaTeX characters in text to prevent formatting issues
-        
-        Args:
-            text: String to escape
-            
-        Returns:
-            str: LaTeX-safe string
-        """
-        if not isinstance(text, str):
-            text = str(text)
-        
-        # Map of LaTeX special characters to their escaped versions
-        replacements = {
-            '\\': r'\textbackslash{}',
-            '_': r'\_',
-            '{': r'\{',
-            '}': r'\}',
-            '$': r'\$',
-            '&': r'\&',
-            '%': r'\%',
-            '#': r'\#',
-            '^': r'\^{}',
-            '~': r'\~{}',
-        }
-        
-        # Replace special characters
-        for char, escaped in replacements.items():
-            text = text.replace(char, escaped)
-        
-        return text
-    
     def run(self):
         """
         Execute full pipeline: recon → AI → attacks → report
@@ -363,7 +330,7 @@ class PipelineOrchestrator:
                 "purpose": "AI-driven penetration test simulation for security assessment",
                 "open_ports_list": [f"{p} - Service detected" for p in recon_data.get('open_ports', [])[:10]],
                 "sensitive_data_list": [
-                    self._escape_latex(f"{f['path']}{f['filename']}") 
+                    f"{f['path']}{f['filename']}" 
                     for f in sensitive_files.get('files', []) 
                     if f.get('sensitivity') == 'High'
                 ][:10],
