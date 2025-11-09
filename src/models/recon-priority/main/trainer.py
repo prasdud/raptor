@@ -1,3 +1,4 @@
+
 """
 Complete ML Pipeline for File Sensitivity Classification
 Predicts whether files contain sensitive data based on metadata
@@ -6,16 +7,25 @@ Predicts whether files contain sensitive data based on metadata
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, accuracy_score
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, accuracy_score, roc_curve, auc, precision_recall_curve, average_precision_score
 from sklearn.preprocessing import LabelEncoder
 import lightgbm as lgb
-import joblib
+# import joblib
 import json
 import re
 from datetime import datetime
 import warnings
+import matplotlib.pyplot as plt
+import seaborn as sns
 warnings.filterwarnings('ignore')
 
+
+import os
+CSV_PATH = 'improved_dataset.csv'
+if not os.path.isfile(CSV_PATH):
+    print(f"❌ ERROR: CSV file '{CSV_PATH}' not found. Please check the path and try again.")
+    exit(1)
+df_main = pd.read_csv(CSV_PATH)
 
 class FileSensitivityClassifier:
     """End-to-end pipeline for file sensitivity classification"""
@@ -100,29 +110,27 @@ class FileSensitivityClassifier:
         
         return features
     
-    def train(self, csv_file):
-        """Train the model on your dataset"""
-        print("📁 Loading dataset...")
-        df = pd.read_csv(csv_file)
-        print(f"✓ Loaded {len(df)} records")
-        
+    def train(self, df):
+        """Train the model on your dataset (df is a DataFrame)"""
+        print(f"📁 Using loaded dataset with {len(df)} records")
+
         # Extract features
         print("\n🔧 Engineering features...")
         features = self.extract_features(df)
         features = self.preprocess_features(features, is_training=True)
         self.feature_names = features.columns.tolist()
-        
+
         # Target variable
         y = df['sensitive']
-        
+
         # Split data
         X_train, X_test, y_train, y_test = train_test_split(
             features, y, test_size=0.2, random_state=42, stratify=y
         )
-        
+
         print(f"✓ Training set: {len(X_train)} | Test set: {len(X_test)}")
         print(f"✓ Class distribution: {y.value_counts().to_dict()}")
-        
+
         # Train LightGBM model with improved hyperparameters
         print("\n🚀 Training LightGBM model...")
         self.model = lgb.LGBMClassifier(
@@ -140,25 +148,39 @@ class FileSensitivityClassifier:
             class_weight='balanced',  # Handle imbalanced data
             scale_pos_weight=1.8  # Extra weight for sensitive class
         )
-        
+
         self.model.fit(X_train, y_train)
-        
+
         # Evaluate
         print("\n📊 Evaluating model...")
         y_pred = self.model.predict(X_test)
         y_pred_proba = self.model.predict_proba(X_test)[:, 1]
-        
+
         print(f"\n✓ Accuracy: {accuracy_score(y_test, y_pred):.4f}")
         print(f"✓ ROC-AUC: {roc_auc_score(y_test, y_pred_proba):.4f}")
-        
+
+        # Classification report
+        from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc, precision_recall_curve, average_precision_score
+        report = classification_report(y_test, y_pred, target_names=['Not Sensitive', 'Sensitive'], output_dict=True)
         print("\n📈 Classification Report:")
         print(classification_report(y_test, y_pred, target_names=['Not Sensitive', 'Sensitive']))
-        
+
+        # Confusion Matrix
         print("\n🎯 Confusion Matrix:")
         cm = confusion_matrix(y_test, y_pred)
         print(f"True Negatives: {cm[0,0]} | False Positives: {cm[0,1]}")
         print(f"False Negatives: {cm[1,0]} | True Positives: {cm[1,1]}")
-        
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        plt.figure(figsize=(6,4))
+        sns.heatmap(cm, annot=True, fmt='d', xticklabels=['Not Sensitive', 'Sensitive'], yticklabels=['Not Sensitive', 'Sensitive'], cmap='Blues')
+        plt.xlabel('Predicted')
+        plt.ylabel('Actual')
+        plt.title('Confusion Matrix')
+        plt.tight_layout()
+        plt.savefig("confusion_matrix.png")
+        plt.close()
+
         # Feature importance
         print("\n🔍 Top 10 Most Important Features:")
         feature_importance = pd.DataFrame({
@@ -166,12 +188,85 @@ class FileSensitivityClassifier:
             'importance': self.model.feature_importances_
         }).sort_values('importance', ascending=False).head(10)
         print(feature_importance.to_string(index=False))
-        
+        plt.figure(figsize=(8,5))
+        sns.barplot(x='importance', y='feature', data=feature_importance)
+        plt.title('Top 10 Feature Importances')
+        plt.tight_layout()
+        plt.savefig("feature_importance.png")
+        plt.close()
+
+        # ROC Curve
+        fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+        roc_auc = auc(fpr, tpr)
+        plt.figure(figsize=(6,5))
+        plt.plot(fpr, tpr, color='blue', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+        plt.plot([0, 1], [0, 1], 'k--', lw=2)
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('Receiver Operating Characteristic (ROC) Curve')
+        plt.legend(loc="lower right")
+        plt.tight_layout()
+        plt.savefig("roc_curve.png")
+        plt.close()
+
+        # Precision-Recall Curve
+        precision, recall, _ = precision_recall_curve(y_test, y_pred_proba)
+        avg_precision = average_precision_score(y_test, y_pred_proba)
+        plt.figure(figsize=(6,5))
+        plt.plot(recall, precision, color='green', lw=2, label=f'PR curve (AP = {avg_precision:.2f})')
+        plt.xlabel('Recall')
+        plt.ylabel('Precision')
+        plt.title('Precision-Recall Curve')
+        plt.legend(loc="best")
+        plt.tight_layout()
+        plt.savefig("precision_recall_curve.png")
+        plt.close()
+
+        # Per-class Precision, Recall, F1-score Bar Plots
+        metrics = ['precision', 'recall', 'f1-score']
+        for metric in metrics:
+            values = [report[cls][metric] for cls in ['Not Sensitive', 'Sensitive']]
+            plt.figure(figsize=(6,4))
+            sns.barplot(x=['Not Sensitive', 'Sensitive'], y=values)
+            plt.ylim(0,1)
+            plt.title(f'Per-class {metric.capitalize()}')
+            plt.ylabel(metric.capitalize())
+            plt.xlabel('Class')
+            plt.tight_layout()
+            plt.savefig(f"per_class_{metric}.png")
+            plt.close()
+
+        # Classification Report Table as Image
+        report_df = pd.DataFrame(report).transpose()
+        plt.figure(figsize=(6,2))
+        sns.heatmap(report_df.iloc[:2, :-1], annot=True, cmap='YlGnBu', fmt='.2f')
+        plt.title('Classification Report')
+        plt.tight_layout()
+        plt.savefig("classification_report.png")
+        plt.close()
+
+        # Learning Curve (if available)
+        if hasattr(self.model, 'evals_result_'):
+            evals_result = self.model.evals_result_
+            if 'training' in evals_result and 'valid_1' in evals_result:
+                plt.figure(figsize=(8,5))
+                plt.plot(evals_result['training']['binary_logloss'], label='Train Logloss')
+                plt.plot(evals_result['valid_1']['binary_logloss'], label='Test Logloss')
+                plt.xlabel('Iteration')
+                plt.ylabel('Logloss')
+                plt.title('Learning Curve (Logloss)')
+                plt.legend()
+                plt.tight_layout()
+                plt.savefig("learning_curve.png")
+                plt.close()
+
         # Cross-validation
         print("\n🔄 Cross-validation scores (5-fold):")
         cv_scores = cross_val_score(self.model, features, y, cv=5, scoring='roc_auc')
         print(f"Mean ROC-AUC: {cv_scores.mean():.4f} (+/- {cv_scores.std() * 2:.4f})")
-        
+
         return self
     
     def save_model(self, model_path='file_sensitivity_model.pkl'):
@@ -273,13 +368,13 @@ def main():
     print("="*70)
     print("STEP 1: TRAINING MODEL")
     print("="*70)
-    classifier.train('improved_dataset.csv')  # Replace with your actual CSV filename
+    classifier.train(df_main)
     
-    # STEP 2: Save the model
-    print("\n" + "="*70)
-    print("STEP 2: SAVING MODEL")
-    print("="*70)
-    classifier.save_model('file_sensitivity_model.pkl')
+    # STEP 2: Save the model (disabled)
+    # print("\n" + "="*70)
+    # print("STEP 2: SAVING MODEL")
+    # print("="*70)
+    # classifier.save_model('file_sensitivity_model.pkl')
     
     # STEP 3: Test inference with example inputs
     print("\n" + "="*70)
